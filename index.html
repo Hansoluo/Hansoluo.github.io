@@ -271,6 +271,184 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hansoluo.github.io/2017/11/14/dl102-ch4-NNLM-深度学习笔记1-神经网络语言模型/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hansoluo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/dylan1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hansoluo's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/14/dl102-ch4-NNLM-深度学习笔记1-神经网络语言模型/" itemprop="url">dl102_ch4_NNLM-深度学习笔记1-神经网络语言模型</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-14T12:37:43+08:00">
+                2017-11-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h2><ul>
+<li>理解神经网络的矩阵表示形式</li>
+<li>了解神经网络语言模型的优势</li>
+<li>理解 Word embedding 的概念（中文可解释为 “词嵌入”，Word embedding 作用是将源数据映射到另一个空间）</li>
+</ul>
+<h2 id="视频1：更深入的理解神经网络"><a href="#视频1：更深入的理解神经网络" class="headerlink" title="视频1：更深入的理解神经网络"></a>视频1：更深入的理解神经网络</h2><ul>
+<li>深度学习算法本质还是梯度下降</li>
+<li>以一个最简单的神经网络来推导w和b</li>
+<li>链式法则 -&gt; 剥洋葱 -&gt; 反向传播算法</li>
+<li>矩阵乘法</li>
+</ul>
+<h2 id="视频2：神经网络的表达能力"><a href="#视频2：神经网络的表达能力" class="headerlink" title="视频2：神经网络的表达能力"></a>视频2：神经网络的表达能力</h2><ul>
+<li>表达能力指的能够表达什么样的x到y的映射关系（函数）</li>
+<li>理论可证明单隐层有限的节点数可以逼近任意形状的函数，但实际应用不可取，节点数庞大</li>
+<li>隐层越多，结果跟准确，运算更快</li>
+<li>以如何学画画举例（类似于认知学中的组块理论）</li>
+</ul>
+<h2 id="视频3：矩阵符合表示神经网络"><a href="#视频3：矩阵符合表示神经网络" class="headerlink" title="视频3：矩阵符合表示神经网络"></a>视频3：矩阵符合表示神经网络</h2><ul>
+<li>W * X -&gt; 输入数据X表达为列向量</li>
+<li>多样本的矩阵乘法</li>
+<li>X * W -&gt; 输入数据 X 表达为行向量</li>
+<li>tf.layers.dense 类似于 矩阵乘法      </li>
+</ul>
+<h2 id="视频4：神经网络语言模型"><a href="#视频4：神经网络语言模型" class="headerlink" title="视频4：神经网络语言模型"></a>视频4：神经网络语言模型</h2><ul>
+<li>统计语言模型存在的问题  <ul>
+<li>N-grama 无法判断两个很像的词  如今天 和 明天</li>
+<li>本质是只靠查字典方式，无法推理和迁移</li>
+</ul>
+</li>
+<li>神经网络语言模型<ul>
+<li>用于情感分类的二分类问题是输出一个概率，表示正面情绪的强度即可</li>
+<li>语言模型要素：<ul>
+<li>输出一个概率分布，有N个词，就有N个输出</li>
+<li>加和等于1</li>
+</ul>
+</li>
+<li>sigmoid -&gt; softmax  归一化指数函数<ul>
+<li>对数据进行归一化处理，所有数据和为1</li>
+<li>权重保持不变，凸显大的值</li>
+</ul>
+</li>
+<li>输入：上下文</li>
+<li>词向量(word embedding)-&gt;权重的向量</li>
+<li>稀疏矩阵</li>
+</ul>
+</li>
+<li>为什么NN_LM可以迁移知识？<ul>
+<li>所有样本进行全局优化</li>
+<li><code>今天</code>和<code>明天</code>在相似的上下文里面，词向量类似</li>
+<li><code>今天</code>有而<code>明天</code>没有的一些上下文，<code>明天</code>可以GET到</li>
+</ul>
+</li>
+</ul>
+<h2 id="课程建议阅读资料"><a href="#课程建议阅读资料" class="headerlink" title="课程建议阅读资料"></a>课程建议阅读资料</h2><ul>
+<li><a href="http://neuralnetworksanddeeplearning.com/chap2.html" target="_blank" rel="external">BP算法</a></li>
+<li><a href="https://www.wikiwand.com/en/Universal_approximation_theorem" target="_blank" rel="external">单隐层无线逼近理论</a></li>
+<li><a href="http://licstar.net/archives/328" target="_blank" rel="external">词向量</a></li>
+<li><a href="https://www.wikiwand.com/en/Softmax_function" target="_blank" rel="external">Softmax function</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hansoluo.github.io/2017/10/07/Hexo博客搭建/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -347,7 +525,7 @@
 <li>第一次浅尝辄止，看了教程觉得很麻烦，而且不理解，就只是看了下</li>
 <li>第二次是看人家的教程，有两个问题不清楚，中途放弃（其实答案很简单）  <ul>
 <li>是否需要购买域名？（不一定需要）</li>
-<li>不需要域名如何设置GitHub_page?(在仓库的Settings选项里勾选)</li>
+<li>不需要域名如何设置GitHub_page？ (在仓库的Settings选项里勾选)</li>
 </ul>
 </li>
 <li>第三次，用google搜索了几篇，写得很简洁，看明白之后，于是动手布置成功</li>
@@ -380,6 +558,7 @@
 </ul>
 <h2 id="文章编写及发布流程"><a href="#文章编写及发布流程" class="headerlink" title="文章编写及发布流程"></a>文章编写及发布流程</h2><ul>
 <li>流程：<ul>
+<li>使用草稿模式<code>hexo new draft &quot;文章标题&quot;</code>写草稿</li>
 <li>用<code>hexo new &quot;文章标题&quot;</code>，会在<code>source-&gt;_posts</code>文件夹内生成一个”文章标题”.md文件，而且和里面的<code>Front-matter</code>中的<code>title</code>对应起来</li>
 <li>本地文章<code>markdown</code>预览(atom编辑器)</li>
 <li>本地服务器预览命令 <code>hexo s -debug</code></li>
@@ -486,7 +665,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -499,7 +678,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
