@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -111,18 +111,18 @@
 
 
 
-<meta name="description" content="从这一课起，真正进入NLP的世界">
+<meta name="description" content="理解了词向量，才算真正进入NLP世界。 NLP的基础概念就是词向量了，CNN、RNN、LSTM等复杂模型都以此为基础。NLP发展到现在，基本已经确定了以统计为核心，而摒弃了以语法为中心。统计属于数学的一个学科。若要以数学来处理，少不得要对对象进行数学建模。词向量即用向量去表示一个词汇，而方便复杂数学模型的处理。">
 <meta name="keywords" content="深度学习">
 <meta property="og:type" content="article">
-<meta property="og:title" content="dl102_ch4_NNLM-深度学习笔记1-神经网络语言模型">
-<meta property="og:url" content="https://hansoluo.github.io/2017/11/14/dl102-ch4-NNLM-深度学习笔记1-神经网络语言模型/index.html">
+<meta property="og:title" content="深度学习笔记1-神经网络语言模型">
+<meta property="og:url" content="https://hansoluo.github.io/2017/11/14/深度学习笔记1-神经网络语言模型/index.html">
 <meta property="og:site_name" content="Hansoluo&#39;s blog">
-<meta property="og:description" content="从这一课起，真正进入NLP的世界">
+<meta property="og:description" content="理解了词向量，才算真正进入NLP世界。 NLP的基础概念就是词向量了，CNN、RNN、LSTM等复杂模型都以此为基础。NLP发展到现在，基本已经确定了以统计为核心，而摒弃了以语法为中心。统计属于数学的一个学科。若要以数学来处理，少不得要对对象进行数学建模。词向量即用向量去表示一个词汇，而方便复杂数学模型的处理。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-14T11:13:47.112Z">
+<meta property="og:updated_time" content="2017-12-11T12:19:28.296Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="dl102_ch4_NNLM-深度学习笔记1-神经网络语言模型">
-<meta name="twitter:description" content="从这一课起，真正进入NLP的世界">
+<meta name="twitter:title" content="深度学习笔记1-神经网络语言模型">
+<meta name="twitter:description" content="理解了词向量，才算真正进入NLP世界。 NLP的基础概念就是词向量了，CNN、RNN、LSTM等复杂模型都以此为基础。NLP发展到现在，基本已经确定了以统计为核心，而摒弃了以语法为中心。统计属于数学的一个学科。若要以数学来处理，少不得要对对象进行数学建模。词向量即用向量去表示一个词汇，而方便复杂数学模型的处理。">
 
 
 
@@ -130,9 +130,9 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Pisces',
+    scheme: 'Mist',
     version: '5.1.3',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: "",
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -152,13 +152,13 @@
 
 
 
-  <link rel="canonical" href="https://hansoluo.github.io/2017/11/14/dl102-ch4-NNLM-深度学习笔记1-神经网络语言模型/"/>
+  <link rel="canonical" href="https://hansoluo.github.io/2017/11/14/深度学习笔记1-神经网络语言模型/"/>
 
 
 
 
 
-  <title>dl102_ch4_NNLM-深度学习笔记1-神经网络语言模型 | Hansoluo's blog</title>
+  <title>深度学习笔记1-神经网络语言模型 | Hansoluo's blog</title>
   
 
 
@@ -174,10 +174,8 @@
 
   
   
-    
-  
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container  page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -275,12 +273,12 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hansoluo.github.io/2017/11/14/dl102-ch4-NNLM-深度学习笔记1-神经网络语言模型/">
+    <link itemprop="mainEntityOfPage" href="https://hansoluo.github.io/2017/11/14/深度学习笔记1-神经网络语言模型/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Hansoluo">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/dylan1.png">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -292,7 +290,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">dl102_ch4_NNLM-深度学习笔记1-神经网络语言模型</h1>
+          <h1 class="post-title" itemprop="name headline">深度学习笔记1-神经网络语言模型</h1>
         
 
         <div class="post-meta">
@@ -336,23 +334,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  561字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  2min
+                  682字
                 </span>
               
             </div>
@@ -373,7 +355,9 @@
       
 
       
-        <p><blockquote class="blockquote-center">从这一课起，真正进入NLP的世界</blockquote><br><a id="more"></a></p>
+        <p>理解了<code>词向量</code>，才算真正进入NLP世界。</p>
+<p>NLP的基础概念就是<code>词向量</code>了，CNN、RNN、LSTM等复杂模型都以此为基础。NLP发展到现在，基本已经确定了以统计为核心，而摒弃了以语法为中心。统计属于数学的一个学科。若要以数学来处理，少不得要对对象进行数学建模。<code>词向量</code>即用向量去表示一个词汇，而方便复杂数学模型的处理。</p>
+<a id="more"></a>
 <h2 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h2><ul>
 <li>理解神经网络的矩阵表示形式</li>
 <li>了解神经网络语言模型的优势</li>
@@ -433,6 +417,9 @@
 <li><a href="http://licstar.net/archives/328" target="_blank" rel="external">词向量</a></li>
 <li><a href="https://www.wikiwand.com/en/Softmax_function" target="_blank" rel="external">Softmax function</a></li>
 </ul>
+<h2 id="Changelog"><a href="#Changelog" class="headerlink" title="Changelog"></a>Changelog</h2><ul>
+<li>2017-11-14 创建</li>
+</ul>
 
       
     </div>
@@ -463,8 +450,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/07/Hexo博客搭建/" rel="next" title="Hexo博客搭建">
-                <i class="fa fa-chevron-left"></i> Hexo博客搭建
+              <a href="/2017/10/07/Hexo博客搭建/" rel="next" title="我的Hexo博客搭建过程">
+                <i class="fa fa-chevron-left"></i> 我的Hexo博客搭建过程
               </a>
             
           </div>
@@ -537,10 +524,6 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image"
-                src="/images/dylan1.png"
-                alt="Hansoluo" />
-            
               <p class="site-author-name" itemprop="name">Hansoluo</p>
               <p class="site-description motion-element" itemprop="description"></p>
           </div>
@@ -565,7 +548,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
@@ -576,20 +559,6 @@
           
 
           <div class="links-of-author motion-element">
-            
-              
-                <span class="links-of-author-item">
-                  <a href="https://github.com/Hansoluo" target="_blank" title="GitHub">
-                    
-                      <i class="fa fa-fw fa-github"></i>GitHub</a>
-                </span>
-              
-                <span class="links-of-author-item">
-                  <a href="https://www.douban.com/people/lavitelloni" target="_blank" title="豆瓣">
-                    
-                      <i class="fa fa-fw fa-globe"></i>豆瓣</a>
-                </span>
-              
             
           </div>
 
@@ -614,7 +583,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#重点"><span class="nav-number">1.</span> <span class="nav-text">重点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#视频1：更深入的理解神经网络"><span class="nav-number">2.</span> <span class="nav-text">视频1：更深入的理解神经网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#视频2：神经网络的表达能力"><span class="nav-number">3.</span> <span class="nav-text">视频2：神经网络的表达能力</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#视频3：矩阵符合表示神经网络"><span class="nav-number">4.</span> <span class="nav-text">视频3：矩阵符合表示神经网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#视频4：神经网络语言模型"><span class="nav-number">5.</span> <span class="nav-text">视频4：神经网络语言模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#课程建议阅读资料"><span class="nav-number">6.</span> <span class="nav-text">课程建议阅读资料</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#重点"><span class="nav-number">1.</span> <span class="nav-text">重点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#视频1：更深入的理解神经网络"><span class="nav-number">2.</span> <span class="nav-text">视频1：更深入的理解神经网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#视频2：神经网络的表达能力"><span class="nav-number">3.</span> <span class="nav-text">视频2：神经网络的表达能力</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#视频3：矩阵符合表示神经网络"><span class="nav-number">4.</span> <span class="nav-text">视频3：矩阵符合表示神经网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#视频4：神经网络语言模型"><span class="nav-number">5.</span> <span class="nav-text">视频4：神经网络语言模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#课程建议阅读资料"><span class="nav-number">6.</span> <span class="nav-text">课程建议阅读资料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Changelog"><span class="nav-number">7.</span> <span class="nav-text">Changelog</span></a></li></ol></div>
             
 
           </div>
@@ -648,7 +617,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">1.2k</span>
+    <span title="Site words total count">1.4k</span>
   
 </div>
 
@@ -661,7 +630,7 @@
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.3</div>
 
 
 
@@ -748,13 +717,6 @@
 
   
   
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
-
-
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
