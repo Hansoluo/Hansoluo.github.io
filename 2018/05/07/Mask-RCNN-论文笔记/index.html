@@ -100,7 +100,7 @@
 
 
 
-  <meta name="keywords" content="读书," />
+  <meta name="keywords" content="深度学习," />
 
 
 
@@ -111,18 +111,18 @@
 
 
 
-<meta name="description" content="现在的人们极度缺乏专注能力。无论是办公室，课堂亦或大街上，都有人低头看手机，而不是专注当下。 缺乏专注能力，会带来长期隐患。上班看手机的人，工作任务会拖延；课堂上看手机的学生，成绩会下滑；施工场所则可能导致安全事故，造成生命危险。 不能专注的原因，不仅是依赖手机，还有走神、焦虑、拖延、紧张等问题。 《全神贯注的方法》这本书里教导你如何专注当下，摆脱上面提到的一系列问题。">
-<meta name="keywords" content="读书">
+<meta name="description" content="Abstract 在 Faster R-CNN 的预测目标边界框的基础上增加一条并行预测目标物体掩膜的分支 关键词： instance segmentation / Faster R-CNN / person keypoint detction  Introduction 计算机视觉领域要解决的问题 目标检测的目标是对图像中物体进行识别并且定位边界框 语义切割的目标是将图像中每一个像素归类到一个固">
+<meta name="keywords" content="深度学习">
 <meta property="og:type" content="article">
-<meta property="og:title" content="全神贯注的方法">
-<meta property="og:url" content="https://hansoluo.github.io/2018/01/03/全神贯注的方法读书笔记/index.html">
+<meta property="og:title" content="Mask R-CNN 论文笔记">
+<meta property="og:url" content="https://hansoluo.github.io/2018/05/07/Mask-RCNN-论文笔记/index.html">
 <meta property="og:site_name" content="Hansoluo&#39;s blog">
-<meta property="og:description" content="现在的人们极度缺乏专注能力。无论是办公室，课堂亦或大街上，都有人低头看手机，而不是专注当下。 缺乏专注能力，会带来长期隐患。上班看手机的人，工作任务会拖延；课堂上看手机的学生，成绩会下滑；施工场所则可能导致安全事故，造成生命危险。 不能专注的原因，不仅是依赖手机，还有走神、焦虑、拖延、紧张等问题。 《全神贯注的方法》这本书里教导你如何专注当下，摆脱上面提到的一系列问题。">
+<meta property="og:description" content="Abstract 在 Faster R-CNN 的预测目标边界框的基础上增加一条并行预测目标物体掩膜的分支 关键词： instance segmentation / Faster R-CNN / person keypoint detction  Introduction 计算机视觉领域要解决的问题 目标检测的目标是对图像中物体进行识别并且定位边界框 语义切割的目标是将图像中每一个像素归类到一个固">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-05T01:37:49.913Z">
+<meta property="og:updated_time" content="2018-05-07T15:23:30.471Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="全神贯注的方法">
-<meta name="twitter:description" content="现在的人们极度缺乏专注能力。无论是办公室，课堂亦或大街上，都有人低头看手机，而不是专注当下。 缺乏专注能力，会带来长期隐患。上班看手机的人，工作任务会拖延；课堂上看手机的学生，成绩会下滑；施工场所则可能导致安全事故，造成生命危险。 不能专注的原因，不仅是依赖手机，还有走神、焦虑、拖延、紧张等问题。 《全神贯注的方法》这本书里教导你如何专注当下，摆脱上面提到的一系列问题。">
+<meta name="twitter:title" content="Mask R-CNN 论文笔记">
+<meta name="twitter:description" content="Abstract 在 Faster R-CNN 的预测目标边界框的基础上增加一条并行预测目标物体掩膜的分支 关键词： instance segmentation / Faster R-CNN / person keypoint detction  Introduction 计算机视觉领域要解决的问题 目标检测的目标是对图像中物体进行识别并且定位边界框 语义切割的目标是将图像中每一个像素归类到一个固">
 
 
 
@@ -152,13 +152,13 @@
 
 
 
-  <link rel="canonical" href="https://hansoluo.github.io/2018/01/03/全神贯注的方法读书笔记/"/>
+  <link rel="canonical" href="https://hansoluo.github.io/2018/05/07/Mask-RCNN-论文笔记/"/>
 
 
 
 
 
-  <title>全神贯注的方法 | Hansoluo's blog</title>
+  <title>Mask R-CNN 论文笔记 | Hansoluo's blog</title>
   
 
 
@@ -275,7 +275,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hansoluo.github.io/2018/01/03/全神贯注的方法读书笔记/">
+    <link itemprop="mainEntityOfPage" href="https://hansoluo.github.io/2018/05/07/Mask-RCNN-论文笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Hansoluo">
@@ -292,7 +292,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">全神贯注的方法</h1>
+          <h1 class="post-title" itemprop="name headline">Mask R-CNN 论文笔记</h1>
         
 
         <div class="post-meta">
@@ -304,8 +304,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-03T06:19:43+08:00">
-                2018-01-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-07T12:27:37+08:00">
+                2018-05-07
               </time>
             
 
@@ -336,7 +336,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,552字
+                  347字
                 </span>
               
             </div>
@@ -357,45 +357,49 @@
       
 
       
-        <p>现在的人们极度缺乏专注能力。无论是办公室，课堂亦或大街上，都有人低头看手机，而不是专注当下。</p>
-<p>缺乏专注能力，会带来长期隐患。上班看手机的人，工作任务会拖延；课堂上看手机的学生，成绩会下滑；施工场所则可能导致安全事故，造成生命危险。</p>
-<p>不能专注的原因，不仅是依赖手机，还有走神、焦虑、拖延、紧张等问题。</p>
-<p>《全神贯注的方法》这本书里教导你如何专注当下，摆脱上面提到的一系列问题。<br><a id="more"></a></p>
-<h2 id="旁观者心态"><a href="#旁观者心态" class="headerlink" title="旁观者心态"></a>旁观者心态</h2><p>排除外在干扰可以提高专注能力，比如隔离手机和网络环境。这种方法有一定效果，但治标不治本，没有手机和网络也可能会走神焦虑，而且现代人无法离开手机和网络。</p>
-<p>本书采用的核心方法是从内心出发，核心是培养旁观者心态。</p>
-<blockquote>
-<p>要培养旁观者心态，像旁观者一样观察自己的想法，这是本书的核心理念。</p>
-</blockquote>
-<p>作者以亲身经历举例。有一次他去演讲，离开场5分钟，他在附近迷路了。如果内心慌张，演讲迟到会被观众指责，但作者冷静下来，找到了路，准时到场。事后认为关键在于他运用了旁观者心态。</p>
-<blockquote>
-<p>回想起来，事情的关键在于，当我迷路的那一刻，正要焦躁时，我感受到了不好的情绪，并及时压制了它。</p>
-</blockquote>
-<p>能否专注当下的关键，在于自我的觉察。这就比如做噩梦，如果不知道是梦，就会一直在梦中，一旦发现是梦，就会醒来。</p>
-<p>旁观者意识是全神贯注的基础。如果不能意识到自己的行为偏离专注，又怎能去改进呢？</p>
-<h2 id="如何冥想"><a href="#如何冥想" class="headerlink" title="如何冥想"></a>如何冥想</h2><p>即使能够自我察觉，仍需训练才能使自己进入专注的状态。很多人意识到自己在拖延，但依然不会行动。</p>
-<p>这种训练，就是冥想。</p>
-<p>书中介绍三种冥想的方法，推荐使用呼吸式冥想，静坐，保持脊椎竖直，观察呼吸。在冥想中，发现自己走神，没关系，将它拉回来。作者说，这个不断偏离和拉回的过程就是冥想。训练这个过程就是提升旁观者意识，有助于快速进入专注状态。</p>
-<blockquote>
-<p>事实上，冥想其实就是一个不断发现思绪偏离，并不断将其拉回正轨的过程，你只要不断重复这个过程，就是在做冥想，你就成功了。大脑走神多少次并不重要。你会发现有时你的大脑会很容易平静，有时则很容易走神，有时你可能能持续专注几十分钟，有时却只能专注几秒钟，这都很正常，每个冥想练习者都是如此。</p>
-<p>冥想最重要的时刻，就是当你发现自己开始走神，并将其拉回来，让其重归平静的一刹那。这时你体内的旁观者在不断成长，不断变得强大。你的意志也在变得强大，而意志是人最有价值的品质，它可以让我们抵制很多诱惑，比如发脾气或者再吃一片披萨的冲动等，也可以让我们做很多事情，比如说离开沙发去跑步等，而冥想最重要的价值，就是让我们的意志变得越来越强大。</p>
-</blockquote>
-<p>当你发现自己在工作或学习中感到无聊、不耐烦，浮想联翩时，回想冥想训练，就会把心拉回来，重新专注眼前的工作。</p>
-<h2 id="设定合理目标"><a href="#设定合理目标" class="headerlink" title="设定合理目标"></a>设定合理目标</h2><p>人们给自己设定很多目标，但是大部分不能实现。想一想那些在年尾时被扔进垃圾篓的新年计划吧，人们总是过高估计自我的执行力。</p>
-<blockquote>
-<p>目标只是为我们指明方向的，而不是用来提醒我们距离终点还有多远的。如果总是想着距离目标还有多远，我们就会变得焦虑纠结，很难专注于当下，自信心也会大受打击，会感觉自己很失败，斗志也被渐渐消磨。</p>
-</blockquote>
-<p>设定不合理的目标，会导致信心不足，变得焦虑，难于专注；反之，设定合理的目标，会形成良好循环，变得更加专注。</p>
-<p>这本书并未谈论如何去设定合理的目标。个人以为，主要依赖精力和任务的匹配。精力分配来自对自我行为的长期记录，掌握个人精力状况；任务匹配来自对计划的分解和细化程度。</p>
-<h2 id="练习的心态"><a href="#练习的心态" class="headerlink" title="练习的心态"></a>练习的心态</h2><p>作者的第一本书是《练习的心态》，因此在书中多次提到要保持练习的心态，有助于专注。</p>
-<p>书中举一个例子。一个高尔夫选手为比赛训练一年，但在比赛中感到焦虑。此时，作者告诉她，把这次比赛当做一次练习吧，不要在乎输赢，只当做是一次宝贵的经验。高尔夫选手因此转变心态，拿了不错的成绩。</p>
-<p>还有一个例子是作者遇到一次难堪的场景，可能会遭到顾客的辱骂。作者依靠练习的心态，成功扭转了局面。</p>
-<p>练习的心态，有助于我们不再集中于目标和成败，而是过程。这有助我们专注做好眼前的事情。它类似这样的想法，既然事已至此，不如看看有什么可以挽救的办法，或者是既然注定失败，不如看做是一次练习的机会。</p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>自我察觉是基础，转换心态是关键，冥想训练是方法，现在开始你的专注之旅吧。</p>
-<h2 id="changelog"><a href="#changelog" class="headerlink" title="changelog"></a>changelog</h2><ul>
-<li>20180101 初稿</li>
-<li>20180103 修改 </li>
+        <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>在 Faster R-CNN 的预测目标边界框的基础上增加一条并行预测目标物体掩膜的分支</li>
+<li>关键词： instance segmentation / Faster R-CNN / person keypoint detction</li>
 </ul>
-<p>© 本文版权归作者  Hansoluo(醉舟)  所有，任何形式转载请联系作者。</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
+<li>计算机视觉领域要解决的问题<ul>
+<li>目标检测的目标是对图像中物体进行识别并且定位边界框</li>
+<li>语义切割的目标是将图像中每一个像素归类到一个固定的物体类别中</li>
+<li>实例切割是两者的结合</li>
+</ul>
+</li>
+<li>Mask R-CNN 框架<ul>
+<li>Faster R-CNN</li>
+<li>对提取的RoI应用FCN来聚类像素</li>
+</ul>
+</li>
+<li>难点<ul>
+<li>Faster R-CNN 将实际的像素图片转换成RPN的卷积特征图</li>
+<li>但RPN的卷积特征图和实际像素图片仍然差很多</li>
+<li>因此在整个框架的输入输出中如法实现pixel-to-pixel对准</li>
+<li>提出RoiAlign来实现空间上的对准</li>
+</ul>
+</li>
+</ul>
+<h2 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h2><ul>
+<li>Faster R-CNN<ul>
+<li>R-CNN 在特征图上直接提取RoI,提升速度和精度</li>
+<li>Faster R-CNN 使用 RPN 进一步提升速度和精度</li>
+</ul>
+</li>
+<li>实例切割<ul>
+<li>DeepMask 提出切割候选区域，再使用Faster R-CNN来分类，速度慢且精度差</li>
+<li>FCIS 使用全卷积同时对目标类别、区域框和掩膜进行预测，速度快但精度差<ul>
+<li>重叠区域多</li>
+<li>分割线不正确</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Mask-R-CNN"><a href="#Mask-R-CNN" class="headerlink" title="Mask R-CNN"></a>Mask R-CNN</h2><h2 id="Experiments：Instance-Segmentation"><a href="#Experiments：Instance-Segmentation" class="headerlink" title="Experiments：Instance Segmentation"></a>Experiments：Instance Segmentation</h2><h2 id="Mask-R-CNN-for-Human-Pose-Estimation"><a href="#Mask-R-CNN-for-Human-Pose-Estimation" class="headerlink" title="Mask R-CNN for Human Pose Estimation"></a>Mask R-CNN for Human Pose Estimation</h2><h3 id="changelog"><a href="#changelog" class="headerlink" title="changelog"></a>changelog</h3><ul>
+<li>20180507 init</li>
+</ul>
 
       
     </div>
@@ -413,7 +417,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/读书/" rel="tag"># 读书</a>
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
           
         </div>
       
@@ -426,8 +430,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/14/深度学习笔记1-神经网络语言模型/" rel="next" title="深度学习笔记1-神经网络语言模型">
-                <i class="fa fa-chevron-left"></i> 深度学习笔记1-神经网络语言模型
+              <a href="/2018/05/06/有关坚持的三个小故事/" rel="next" title="有关坚持的三个小故事">
+                <i class="fa fa-chevron-left"></i> 有关坚持的三个小故事
               </a>
             
           </div>
@@ -435,10 +439,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/02/人生的一瞬/" rel="prev" title="人生的一瞬">
-                人生的一瞬 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -587,7 +587,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#旁观者心态"><span class="nav-number">1.</span> <span class="nav-text">旁观者心态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何冥想"><span class="nav-number">2.</span> <span class="nav-text">如何冥想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设定合理目标"><span class="nav-number">3.</span> <span class="nav-text">设定合理目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习的心态"><span class="nav-number">4.</span> <span class="nav-text">练习的心态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">5.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#changelog"><span class="nav-number">6.</span> <span class="nav-text">changelog</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Related-Work"><span class="nav-number">3.</span> <span class="nav-text">Related Work</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mask-R-CNN"><span class="nav-number">4.</span> <span class="nav-text">Mask R-CNN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiments：Instance-Segmentation"><span class="nav-number">5.</span> <span class="nav-text">Experiments：Instance Segmentation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mask-R-CNN-for-Human-Pose-Estimation"><span class="nav-number">6.</span> <span class="nav-text">Mask R-CNN for Human Pose Estimation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#changelog"><span class="nav-number">6.1.</span> <span class="nav-text">changelog</span></a></li></ol></li></ol></div>
             
 
           </div>
