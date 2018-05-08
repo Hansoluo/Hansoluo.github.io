@@ -111,18 +111,18 @@
 
 
 
-<meta name="description" content="Abstract 在 Faster R-CNN 的预测目标边界框的基础上增加一条并行预测目标物体掩膜的分支 关键词： instance segmentation / Faster R-CNN / person keypoint detction  Introduction 计算机视觉领域要解决的问题 目标检测的目标是对图像中物体进行识别并且定位边界框 语义切割的目标是将图像中每一个像素归类到一个固">
+<meta name="description" content="Abstract 在 Faster R-CNN 的预测目标边界框的基础上增加一条并行预测目标物体掩膜的分支 关键词： instance segmentation / Faster R-CNN / person keypoint detction">
 <meta name="keywords" content="深度学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mask R-CNN 论文笔记">
 <meta property="og:url" content="https://hansoluo.github.io/2018/05/07/Mask-RCNN-论文笔记/index.html">
 <meta property="og:site_name" content="Hansoluo&#39;s blog">
-<meta property="og:description" content="Abstract 在 Faster R-CNN 的预测目标边界框的基础上增加一条并行预测目标物体掩膜的分支 关键词： instance segmentation / Faster R-CNN / person keypoint detction  Introduction 计算机视觉领域要解决的问题 目标检测的目标是对图像中物体进行识别并且定位边界框 语义切割的目标是将图像中每一个像素归类到一个固">
+<meta property="og:description" content="Abstract 在 Faster R-CNN 的预测目标边界框的基础上增加一条并行预测目标物体掩膜的分支 关键词： instance segmentation / Faster R-CNN / person keypoint detction">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-07T15:23:30.471Z">
+<meta property="og:updated_time" content="2018-05-08T15:06:09.670Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mask R-CNN 论文笔记">
-<meta name="twitter:description" content="Abstract 在 Faster R-CNN 的预测目标边界框的基础上增加一条并行预测目标物体掩膜的分支 关键词： instance segmentation / Faster R-CNN / person keypoint detction  Introduction 计算机视觉领域要解决的问题 目标检测的目标是对图像中物体进行识别并且定位边界框 语义切割的目标是将图像中每一个像素归类到一个固">
+<meta name="twitter:description" content="Abstract 在 Faster R-CNN 的预测目标边界框的基础上增加一条并行预测目标物体掩膜的分支 关键词： instance segmentation / Faster R-CNN / person keypoint detction">
 
 
 
@@ -336,7 +336,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  347字
+                  687字
                 </span>
               
             </div>
@@ -359,7 +359,8 @@
       
         <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
 <li>在 Faster R-CNN 的预测目标边界框的基础上增加一条并行预测目标物体掩膜的分支</li>
-<li>关键词： instance segmentation / Faster R-CNN / person keypoint detction</li>
+<li>关键词： instance segmentation / Faster R-CNN / person keypoint detction<a id="more"></a>
+</li>
 </ul>
 <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
 <li>计算机视觉领域要解决的问题<ul>
@@ -397,8 +398,43 @@
 </ul>
 </li>
 </ul>
-<h2 id="Mask-R-CNN"><a href="#Mask-R-CNN" class="headerlink" title="Mask R-CNN"></a>Mask R-CNN</h2><h2 id="Experiments：Instance-Segmentation"><a href="#Experiments：Instance-Segmentation" class="headerlink" title="Experiments：Instance Segmentation"></a>Experiments：Instance Segmentation</h2><h2 id="Mask-R-CNN-for-Human-Pose-Estimation"><a href="#Mask-R-CNN-for-Human-Pose-Estimation" class="headerlink" title="Mask R-CNN for Human Pose Estimation"></a>Mask R-CNN for Human Pose Estimation</h2><h3 id="changelog"><a href="#changelog" class="headerlink" title="changelog"></a>changelog</h3><ul>
+<h2 id="Mask-R-CNN"><a href="#Mask-R-CNN" class="headerlink" title="Mask R-CNN"></a>Mask R-CNN</h2><ul>
+<li>Faster R-CNN 分为两级训练<ul>
+<li>第一阶段称为RPN，提出目标的候选框</li>
+<li>第二阶段是精简版的Fast R-CNN，使用RoIPool从第一阶段输入的候选框中提取特征进行分类和边界框回归</li>
+<li>两个阶段提取的特征可以实现共享，用来加快速度</li>
+</ul>
+</li>
+<li>Mask R-CNN<ul>
+<li>思路<ul>
+<li>两个阶段同Faster R-CNN，而且对提取出的每一个RoI输出二分的掩膜</li>
+<li>借鉴Fast R-CNN的思路，并行的去实现边界框的分类和位置回归（大大R-CNN的增强速度）</li>
+</ul>
+</li>
+<li>损失函数定义<ul>
+<li>三部分：分类+边界框+掩膜</li>
+<li>掩膜分支的输出为： K<em>m</em>m 维度数量 (K 为类别的个数，m*m为分辨率)</li>
+<li>对每一个像素进行加上sigmoid激励输出</li>
+<li>再对总的交叉熵损失函数取平均为最后的损失函数</li>
+</ul>
+</li>
+<li>RoIAlign<ul>
+<li>RoIPool是一种从ROI中提取特征图的标准操作，其原理是将区域离散化到格子中，但是比较粗糙</li>
+<li>在RoIPool的基础上，使用双线性插值（bilinear interpolation）来实现对准</li>
+</ul>
+</li>
+<li>网络架构<ul>
+<li>原始的Faster R-CNN的主干网络使用 ResNet-50-C4</li>
+<li>本文使用 ResNet-FPN 来替代，可以应对各种尺寸的图片</li>
+<li>其他部分做了轻微的调整</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Experiments：Instance-Segmentation"><a href="#Experiments：Instance-Segmentation" class="headerlink" title="Experiments：Instance Segmentation"></a>Experiments：Instance Segmentation</h2><h2 id="Mask-R-CNN-for-Human-Pose-Estimation"><a href="#Mask-R-CNN-for-Human-Pose-Estimation" class="headerlink" title="Mask R-CNN for Human Pose Estimation"></a>Mask R-CNN for Human Pose Estimation</h2><h3 id="changelog"><a href="#changelog" class="headerlink" title="changelog"></a>changelog</h3><ul>
 <li>20180507 init</li>
+<li>20180508 add </li>
 </ul>
 
       
@@ -439,6 +475,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/08/编编程作曲基本架构/" rel="prev" title="JythonMusic学习笔记">
+                JythonMusic学习笔记 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -519,7 +559,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -532,7 +572,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -621,7 +661,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">6.6k</span>
+    <span title="Site words total count">7.3k</span>
   
 </div>
 
