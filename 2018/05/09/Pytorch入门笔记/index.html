@@ -100,7 +100,7 @@
 
 
 
-  <meta name="keywords" content="工具," />
+  <meta name="keywords" content="深度学习," />
 
 
 
@@ -111,18 +111,18 @@
 
 
 
-<meta name="description" content="此为本博客建立的第一篇文章，记录了搭建hexo博客的过程。博客搭建本意是用来记录一些技术型的文章，比如折腾各种工具的过程，学习编程的过程记录等，或者一些杂七杂八的思考吧。比豆瓣简书清净，比之微信公众号便于修改和管理。">
-<meta name="keywords" content="工具">
+<meta name="description" content="为什么用pytorch">
+<meta name="keywords" content="深度学习">
 <meta property="og:type" content="article">
-<meta property="og:title" content="我的Hexo博客搭建过程">
-<meta property="og:url" content="https://hansoluo.github.io/2017/10/07/Hexo博客搭建/index.html">
+<meta property="og:title" content="pytorch入门笔记">
+<meta property="og:url" content="https://hansoluo.github.io/2018/05/09/Pytorch入门笔记/index.html">
 <meta property="og:site_name" content="Hansoluo&#39;s blog">
-<meta property="og:description" content="此为本博客建立的第一篇文章，记录了搭建hexo博客的过程。博客搭建本意是用来记录一些技术型的文章，比如折腾各种工具的过程，学习编程的过程记录等，或者一些杂七杂八的思考吧。比豆瓣简书清净，比之微信公众号便于修改和管理。">
+<meta property="og:description" content="为什么用pytorch">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-11T13:02:17.541Z">
+<meta property="og:updated_time" content="2018-05-10T16:20:07.852Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="我的Hexo博客搭建过程">
-<meta name="twitter:description" content="此为本博客建立的第一篇文章，记录了搭建hexo博客的过程。博客搭建本意是用来记录一些技术型的文章，比如折腾各种工具的过程，学习编程的过程记录等，或者一些杂七杂八的思考吧。比豆瓣简书清净，比之微信公众号便于修改和管理。">
+<meta name="twitter:title" content="pytorch入门笔记">
+<meta name="twitter:description" content="为什么用pytorch">
 
 
 
@@ -152,13 +152,13 @@
 
 
 
-  <link rel="canonical" href="https://hansoluo.github.io/2017/10/07/Hexo博客搭建/"/>
+  <link rel="canonical" href="https://hansoluo.github.io/2018/05/09/Pytorch入门笔记/"/>
 
 
 
 
 
-  <title>我的Hexo博客搭建过程 | Hansoluo's blog</title>
+  <title>pytorch入门笔记 | Hansoluo's blog</title>
   
 
 
@@ -275,7 +275,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hansoluo.github.io/2017/10/07/Hexo博客搭建/">
+    <link itemprop="mainEntityOfPage" href="https://hansoluo.github.io/2018/05/09/Pytorch入门笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Hansoluo">
@@ -292,7 +292,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">我的Hexo博客搭建过程</h1>
+          <h1 class="post-title" itemprop="name headline">pytorch入门笔记</h1>
         
 
         <div class="post-meta">
@@ -304,8 +304,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-07T11:40:56+08:00">
-                2017-10-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-09T20:40:50+08:00">
+                2018-05-09
               </time>
             
 
@@ -336,7 +336,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  708字
+                  496字
                 </span>
               
             </div>
@@ -357,72 +357,67 @@
       
 
       
-        <p>此为本博客建立的第一篇文章，记录了搭建hexo博客的过程。博客搭建本意是用来记录一些技术型的文章，比如折腾各种工具的过程，学习编程的过程记录等，或者一些杂七杂八的思考吧。比豆瓣简书清净，比之微信公众号便于修改和管理。<br><a id="more"></a></p>
-<h2 id="搭建博客"><a href="#搭建博客" class="headerlink" title="搭建博客"></a>搭建博客</h2><ul>
-<li>搭建过程<ul>
-<li>第一次浅尝辄止，看了教程觉得很麻烦，而且不理解，就只是看了下</li>
-<li>第二次是看人家的教程，有两个问题不清楚，中途放弃（其实答案很简单）  <ul>
-<li>是否需要购买域名？（不一定需要）</li>
-<li>不需要域名如何设置GitHub_page？ (在仓库的Settings选项里勾选)</li>
+        <h2 id="为什么用pytorch"><a href="#为什么用pytorch" class="headerlink" title="为什么用pytorch"></a>为什么用pytorch</h2><a id="more"></a>
+<ul>
+<li><p>常用深度学习框架对比</p>
+<ul>
+<li>Theano：已经停止更新</li>
+<li>Tensorflow: Goggle强推的工具，较底层，功能强大，最流行</li>
+<li>Keras： 针对Tensorflow等框架的层层封装，易用，不够灵活</li>
+<li>Caffe2: CV领域利器，性能优越，文档少，推广少</li>
+<li>MXNet: 文档混乱，但分布式性能强大，适合AWS云平台</li>
+<li>CNTK： 语音领域利器，文档少，推广少</li>
 </ul>
 </li>
-<li>第三次，用google搜索了几篇，写得很简洁，看明白之后，于是动手布置成功</li>
+<li><p>Pytorch的优点</p>
+<ul>
+<li>简洁（代码少）</li>
+<li>速度（释放内存，运行快）</li>
+<li>易用（API接口简单易懂）</li>
+<li>流行（文档完善，社区活跃）</li>
 </ul>
 </li>
-<li>参考文档<ul>
-<li><a href="https://gist.github.com/btfak/18938572f5df000ebe06fbd1872e4e39" target="_blank" rel="external">How to use Hexo and deploy to GitHub Pages</a></li>
-<li><a href="https://github.com/limedroid/HexoLearning" target="_blank" rel="external">Hexo 博客搭建指南</a></li>
-<li><a href="http://lixiaolai.com/2016/06/22/makecs-build-a-blog-with-hexo-on-github/" target="_blank" rel="external">使用 Hexo 为自己在 Github 上建一个静态 Blog 站点
-</a></li>
-<li><a href="https://xuanwo.org/2015/03/26/hexo-intor/" target="_blank" rel="external">史上最详细的Hexo博客搭建图文教程
-</a></li>
+<li><p>fast.ai 放弃 keras+tensorflow 选择 Pytorch</p>
+<ul>
+<li>用keras无法实现 attention 模型，tensorflow实现太过复杂，而pytorch可以</li>
+<li>tensorflow的静态图，则好比黑箱操作，无法了解内部。pytorch不是基于静态计算图，而是动态框架，可以像python一样交互式的运行和debug，方便调试</li>
 </ul>
-</li>
-</ul>
-<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><ul>
-<li>hexo 是一个轻量级的基于<code>Node.js</code>的静态博客框架<ul>
-<li>里面已经将各种写博客需要的框架都规定好了</li>
-</ul>
-</li>
-<li>theme 类似于atom的主题插件，可以随意选择安装更换<ul>
-<li>在这里我使用的是<code>Next</code>主题，在网站的底部会有显示</li>
-<li>参照<a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="external">Next官方文档</a>，可以完成很多页面的布局和设置，比如添加侧边栏、标签和搜索等功能</li>
+<ul>
+<li><a href="http://www.fast.ai/2017/09/08/introducing-pytorch-for-fastai/" target="_blank" rel="external">Introducing Pytorch for fast.ai</a></li>
 </ul>
 </li>
 </ul>
-<h2 id="主题美化"><a href="#主题美化" class="headerlink" title="主题美化"></a>主题美化</h2><ul>
-<li><a href="https://eason-yang.com/2016/11/05/add-word-count-to-hexo-next/" target="_blank" rel="external">为Hexo NexT主题添加字数统计功能</a></li>
-<li><a href="http://prozhuchen.com/2015/10/05/Hexo%E5%8D%9A%E5%AE%A2%E4%B9%8B%E6%94%B9%E5%AD%97%E4%BD%93/" target="_blank" rel="external">Hexo博客之改字体和大小</a></li>
-<li><a href="http://theme-next.iissnan.com/tag-plugins.html" target="_blank" rel="external">文本居中的引用</a></li>
-<li><a href="http://theme-next.iissnan.com/faqs.html" target="_blank" rel="external">设置阅读全文</a></li>
-</ul>
-<h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><ul>
-<li>hexo本身只能完成本地的部署，不可以完成公网的部署</li>
-<li>公网部署的原理是利用<code>github</code>生成的<code>GitHub_page</code>，生成独立域名后，再利用它来进行公网部署，这样别人也可以来看你的博客</li>
-</ul>
-<h2 id="文章编写及发布流程"><a href="#文章编写及发布流程" class="headerlink" title="文章编写及发布流程"></a>文章编写及发布流程</h2><ul>
-<li>流程：<ul>
-<li>使用草稿模式<code>hexo new draft &quot;文章标题&quot;</code>写草稿</li>
-<li>用<code>hexo new &quot;文章标题&quot;</code>，会在<code>source-&gt;_posts</code>文件夹内生成一个”文章标题”.md文件，而且和里面的<code>Front-matter</code>中的<code>title</code>对应起来</li>
-<li>本地文章<code>markdown</code>预览(atom编辑器)</li>
-<li>本地服务器预览命令 <code>hexo s -debug</code></li>
-<li>发布命令 <code>hexo cgd</code>（缩写）</li>
-</ul>
-</li>
-<li><p>使用以下命令进行发布:</p>
-<blockquote>
-<p>hexo clean  # 删除本地静态文件（Public目录）</p>
-<p>hexo g # 生成本地静态文件（Public目录）</p>
-<p>hexo d # 将本地静态文件推送至github</p>
+<h2 id="pytorch的基本类型"><a href="#pytorch的基本类型" class="headerlink" title="pytorch的基本类型"></a>pytorch的基本类型</h2><blockquote>
+<p>pytorch的整个层级是按照 tensor –&gt; varaiable(autograd) –&gt; nn.Module 从高到低组成的。基本的tesor组成可以自动求导的variable数据类型</p>
 </blockquote>
-</li>
-<li><p>后面两个命令可以简化为一个<code>hexo g -d</code></p>
-</li>
-<li>发布文章后，如果对文章修改后重新发布，则无需<code>hexo new</code>，其他同发布流程</li>
+<ul>
+<li>tensor<ul>
+<li>张量，可以看做是多维数组<ul>
+<li>文本，一维数组</li>
+<li>音频，二维数组</li>
+<li>彩色图片，三维数组（第三维为颜色通道）</li>
 </ul>
-<h2 id="Changelog"><a href="#Changelog" class="headerlink" title="Changelog"></a>Changelog</h2><ul>
-<li>2017-10-7 创建</li>
-<li>2017-11-14 增加主题美化</li>
+</li>
+<li>运算基本同numpy，具有良好的继承性</li>
+<li>维度变形操作用 <code>view</code> 函数，区别于numpy中的 <code>reshape</code></li>
+<li>可通过<code>.cuda</code>方法转化为GPU的Tensor，实现加速运算</li>
+</ul>
+</li>
+<li>Variable<ul>
+<li>对data、grad_fn、grad的封装<ul>
+<li>data和grad是数据，grad是data对应的梯度</li>
+<li>grad_fn是method，用来反向传播时计算输入的梯度</li>
+<li>类似于python的list数据类型，自动的将数据排列好，并赋予一个下标</li>
+</ul>
+</li>
+<li>调用Variable的backward()，会进行反向传播自动微分计算梯度</li>
+<li>grad在反向传播过程从事累加的，意味着每次进行反向传播，梯度都会累加之前的梯度，所以每次进行反向传播之前需要把梯度清零</li>
+</ul>
+</li>
+<li>nn</li>
+</ul>
+<h3 id="changelog"><a href="#changelog" class="headerlink" title="changelog"></a>changelog</h3><ul>
+<li>20180510 init</li>
 </ul>
 
       
@@ -441,7 +436,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/工具/" rel="tag"># 工具</a>
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
           
         </div>
       
@@ -454,14 +449,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/05/08/编编程作曲基本架构/" rel="next" title="JythonMusic学习笔记">
+                <i class="fa fa-chevron-left"></i> JythonMusic学习笔记
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/11/14/深度学习笔记1-神经网络语言模型/" rel="prev" title="深度学习笔记1-神经网络语言模型">
-                深度学习笔记1-神经网络语言模型 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/11/pytorch和keras-tensorflow的比较/" rel="prev" title="pytorch和keras+tensorflow的比较">
+                pytorch和keras+tensorflow的比较 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -611,7 +610,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建博客"><span class="nav-number">1.</span> <span class="nav-text">搭建博客</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-number">2.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主题美化"><span class="nav-number">3.</span> <span class="nav-text">主题美化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署"><span class="nav-number">4.</span> <span class="nav-text">部署</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文章编写及发布流程"><span class="nav-number">5.</span> <span class="nav-text">文章编写及发布流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Changelog"><span class="nav-number">6.</span> <span class="nav-text">Changelog</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么用pytorch"><span class="nav-number">1.</span> <span class="nav-text">为什么用pytorch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pytorch的基本类型"><span class="nav-number">2.</span> <span class="nav-text">pytorch的基本类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#changelog"><span class="nav-number">2.1.</span> <span class="nav-text">changelog</span></a></li></ol></li></ol></div>
             
 
           </div>
