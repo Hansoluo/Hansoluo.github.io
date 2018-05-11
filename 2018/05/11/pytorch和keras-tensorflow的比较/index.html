@@ -119,7 +119,7 @@
 <meta property="og:site_name" content="Hansoluo&#39;s blog">
 <meta property="og:description" content="一句话的感受是： 如果说 tensorflow 则是 C++的话，pytorch 就是 python 。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-10T16:20:30.208Z">
+<meta property="og:updated_time" content="2018-05-11T16:54:08.452Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="pytorch和keras+tensorflow的比较">
 <meta name="twitter:description" content="一句话的感受是： 如果说 tensorflow 则是 C++的话，pytorch 就是 python 。">
@@ -336,7 +336,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  112字
+                  691字
                 </span>
               
             </div>
@@ -360,7 +360,43 @@
         <p>一句话的感受是：</p>
 <p>如果说 <code>tensorflow</code> 则是 <code>C++</code>的话，<code>pytorch</code> 就是 <code>python</code> 。<br><a id="more"></a></p>
 <p>比如说都是对 <code>tensor</code> 进行操作，<code>tensorflow</code>缺乏好用的数据类型,而<code>pytorch</code>却有可以实现自动求导的<code>Variable</code>，就像python中非常好用的list数据类型。</p>
-<p>在数据的加载方便，这一度是困扰很多人的<code>脏活</code>，keras和pytorch都有可以用来加载数据集的工具，但是用法有有点不同。</p>
+<h2 id="数据预处理和加载"><a href="#数据预处理和加载" class="headerlink" title="数据预处理和加载"></a>数据预处理和加载</h2><p>在数据的加载方便，这一度是困扰很多人的<code>脏活</code>，keras和pytorch都有可以用来加载数据集的工具，但是用法有有点不同。</p>
+<h3 id="keras-中的数据处理"><a href="#keras-中的数据处理" class="headerlink" title="keras 中的数据处理"></a>keras 中的数据处理</h3><ul>
+<li>常规的数据预处理流程：<ul>
+<li>定义变量X和Y，明确shape</li>
+<li>读取和转化图片数据，需用到opencv</li>
+<li>遍历图片，存入 X 和 Y</li>
+<li>使用sklearn.model_selection的train_test_split完成训练和测试数据集的切分</li>
+</ul>
+</li>
+<li>数据增强：</li>
+</ul>
+<h3 id="pytorch-中的数据处理"><a href="#pytorch-中的数据处理" class="headerlink" title="pytorch 中的数据处理"></a>pytorch 中的数据处理</h3><p>在pytorch 分为两步中有数据集和数据加载。</p>
+<ul>
+<li>Dataset.ImageFolder(root, transform, target_transform, loader)<ul>
+<li>读取文件夹root –&gt; loader加载图片 –&gt; transform转换 –&gt; target_transform</li>
+<li>transform提供了对图片数据的各种增强、归一转化等操作</li>
+<li>label是按图片数据不同类的文件夹名顺序来自动编码的，即{类名：类序号}，一般从0开始，比如 cat:0 dog:1，如果不清楚，可以通过self.class_to_idx属性来查看</li>
+<li>实际负责对原始数据的处理(Image –&gt; input_data + label)</li>
+</ul>
+</li>
+<li>Dataloader(dataset, batch_size=1, shuffle=False, sampler=None, num_workers=0, collate_fn=default_collate, pin_memory=False, drop_last=False)<ul>
+<li>dataset: 前一步构建好的数据集</li>
+<li>batch_size: CNN的训练一般都是分批，每次对一个batch的数据进行操作，比全部喂入SGD的准确率和速度更好。需要注意batch越大，占用内存越大</li>
+<li>shuffle: 随机打乱 num_workers：多进程加载数</li>
+<li>数据以何种方式喂入训练模型，单条数据实际上还是[image,label]</li>
+<li>dataloader是一个可迭代的对象</li>
+</ul>
+</li>
+</ul>
+<h2 id="构建计算图"><a href="#构建计算图" class="headerlink" title="构建计算图"></a>构建计算图</h2><p>模型方面，两者不相上下，CNN的model都可以实现，可能RNN相关的keras差一点，没有pytorch灵活。</p>
+<p>keras使用的是静态图的方式，涉及优化器的选择、损失函数的定义，模型的保存等等。<br>训练模型时，把事先定义好的X_tarin和Y_train，喂入模型直接训练<br><code>model.fit(X_train, y_train, batch_size=32, epochs=16......)</code></p>
+<p>Pytorch则需要动态地构建可自动求导的变量Variable,喂入模型，定义loss进行反向传播求导。<br><code>loss.backward()</code></p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>kears更简单点，但是也可能过封装了。Pytorch的动态构建需要遵循tensor–&gt;Variable–&gt;model的层级逐步定义完成，比keras麻烦一点，但是极大的利用了python的语法，增加了灵活性。</p>
+<p>使用keras，更多的是调用函数，而几乎不用写过多的代码；使用pytorch，则天然的用python语言，来灵活构建所需代码。</p>
+<h3 id="changelog"><a href="#changelog" class="headerlink" title="changelog"></a>changelog</h3><ul>
+<li>20180511 init</li>
+</ul>
 
       
     </div>
@@ -400,6 +436,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/11/吉他练习手记（一）/" rel="prev" title="吉他练习手记（一）">
+                吉他练习手记（一） <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -451,8 +491,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -471,7 +520,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -484,7 +533,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -530,6 +579,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据预处理和加载"><span class="nav-number">1.</span> <span class="nav-text">数据预处理和加载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#keras-中的数据处理"><span class="nav-number">1.1.</span> <span class="nav-text">keras 中的数据处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pytorch-中的数据处理"><span class="nav-number">1.2.</span> <span class="nav-text">pytorch 中的数据处理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构建计算图"><span class="nav-number">2.</span> <span class="nav-text">构建计算图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">3.</span> <span class="nav-text">结论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#changelog"><span class="nav-number">3.1.</span> <span class="nav-text">changelog</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -557,7 +622,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">7.9k</span>
+    <span title="Site words total count">8.6k</span>
   
 </div>
 
