@@ -111,18 +111,18 @@
 
 
 
-<meta name="description" content="为什么用pytorch">
+<meta name="description" content="为什么选择pytorch">
 <meta name="keywords" content="深度学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="pytorch入门笔记">
 <meta property="og:url" content="https://hansoluo.github.io/2018/05/09/Pytorch入门笔记/index.html">
 <meta property="og:site_name" content="Hansoluo&#39;s blog">
-<meta property="og:description" content="为什么用pytorch">
+<meta property="og:description" content="为什么选择pytorch">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-11T15:10:30.890Z">
+<meta property="og:updated_time" content="2018-05-17T15:18:41.597Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="pytorch入门笔记">
-<meta name="twitter:description" content="为什么用pytorch">
+<meta name="twitter:description" content="为什么选择pytorch">
 
 
 
@@ -336,7 +336,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  566字
+                  754字
                 </span>
               
             </div>
@@ -357,16 +357,21 @@
       
 
       
-        <h2 id="为什么用pytorch"><a href="#为什么用pytorch" class="headerlink" title="为什么用pytorch"></a>为什么用pytorch</h2><a id="more"></a>
+        <h2 id="为什么选择pytorch"><a href="#为什么选择pytorch" class="headerlink" title="为什么选择pytorch"></a>为什么选择pytorch</h2><a id="more"></a>
 <ul>
-<li><p>常用深度学习框架对比</p>
-<ul>
+<li>常用深度学习框架对比<ul>
 <li>Theano：已经停止更新</li>
 <li>Tensorflow: Goggle强推的工具，较底层，功能强大，最流行</li>
 <li>Keras： 针对Tensorflow等框架的层层封装，易用，不够灵活</li>
 <li>Caffe2: CV领域利器，性能优越，文档少，推广少</li>
 <li>MXNet: 文档混乱，但分布式性能强大，适合AWS云平台</li>
 <li>CNTK： 语音领域利器，文档少，推广少</li>
+</ul>
+</li>
+<li><p>github指标</p>
+<ul>
+<li>pytorch的 github 数据： 6,774 repositorys</li>
+<li>keras 的 github 数据：10,809 repositorys</li>
 </ul>
 </li>
 <li><p>Pytorch的优点</p>
@@ -388,7 +393,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="pytorch的基本类型"><a href="#pytorch的基本类型" class="headerlink" title="pytorch的基本类型"></a>pytorch的基本类型</h2><blockquote>
+<h2 id="pytorch的基本组成"><a href="#pytorch的基本组成" class="headerlink" title="pytorch的基本组成"></a>pytorch的基本组成</h2><blockquote>
 <p>pytorch的整个层级是按照 tensor –&gt; varaiable(autograd) –&gt; nn.Module 从高到低组成的。基本的tesor组成可以自动求导的variable数据类型</p>
 </blockquote>
 <ul>
@@ -415,12 +420,43 @@
 <li>grad在反向传播过程从事累加的，意味着每次进行反向传播，梯度都会累加之前的梯度，所以每次进行反向传播之前需要把梯度清零</li>
 </ul>
 </li>
-<li>nn</li>
+<li>nn<ul>
+<li>主要是nn.Module模块，用于搭建各种深度神经网络模型</li>
 </ul>
-<p>在论坛里的看到经常会出现一些问题，docs无法替代全部，还是需要去看源码，pytorch的源码基本是python编写的，可读性比较强，可以快速debug。</p>
-<p>pytorch的 github 数据： 6,774 repositorys<br>keras 的 github 数据：10,809 repositorys</p>
+</li>
+</ul>
+<h2 id="pytorch的数据加载"><a href="#pytorch的数据加载" class="headerlink" title="pytorch的数据加载"></a>pytorch的数据加载</h2><ul>
+<li>手动加载，使用np.loadtxt或pandas读取，定义x和y的Variable。在建立forward pass时，传递给model。这种方法适用于少量数据，无法使用batch。</li>
+<li>Dataset 数据集<ul>
+<li><code>__init__</code>: 读取数据，并定义x和y</li>
+<li><code>__getitem__</code>: 返回一条数据(x,y)</li>
+<li><code>__len__</code>: 返回数据集的长度 </li>
+</ul>
+</li>
+<li>Dataloader 数据加载<ul>
+<li><code>dataset</code>: 前一步构建好的数据集</li>
+<li><code>batch_size</code>: CNN的训练一般都是分批，每次对一个batch的数据进行操作，比全部喂入SGD的准确率和速度更好。需要注意batch越大，占用内存越大</li>
+<li><code>shuffle</code>: 随机打乱 num_workers：多进程加载数</li>
+<li><code>num_workers</code>: 进程数，可以并行加载，提高速度</li>
+</ul>
+</li>
+</ul>
+<h2 id="应用基本流程"><a href="#应用基本流程" class="headerlink" title="应用基本流程"></a>应用基本流程</h2><ul>
+<li>Dataset</li>
+<li>Dataloader</li>
+<li>Design your model using class<ul>
+<li>all by hand</li>
+<li>select from PyTorch API</li>
+</ul>
+</li>
+<li>Construct loss and optimizer (select from Pytorch API)</li>
+<li>Training cycle (forward, backward, update)</li>
+<li>Validate </li>
+<li>Test</li>
+</ul>
 <h3 id="changelog"><a href="#changelog" class="headerlink" title="changelog"></a>changelog</h3><ul>
 <li>20180510 init</li>
+<li>20180517 add dataloader and basic flowchart</li>
 </ul>
 
       
@@ -462,8 +498,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/11/pytorch和keras-tensorflow的比较/" rel="prev" title="pytorch和keras+tensorflow的比较">
-                pytorch和keras+tensorflow的比较 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/11/pytorch和keras-tensorflow的比较/" rel="prev" title="pytorch和keras的比较">
+                pytorch和keras的比较 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -545,7 +581,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -613,7 +649,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么用pytorch"><span class="nav-number">1.</span> <span class="nav-text">为什么用pytorch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pytorch的基本类型"><span class="nav-number">2.</span> <span class="nav-text">pytorch的基本类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#changelog"><span class="nav-number">2.1.</span> <span class="nav-text">changelog</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么选择pytorch"><span class="nav-number">1.</span> <span class="nav-text">为什么选择pytorch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pytorch的基本组成"><span class="nav-number">2.</span> <span class="nav-text">pytorch的基本组成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pytorch的数据加载"><span class="nav-number">3.</span> <span class="nav-text">pytorch的数据加载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用基本流程"><span class="nav-number">4.</span> <span class="nav-text">应用基本流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#changelog"><span class="nav-number">4.1.</span> <span class="nav-text">changelog</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -647,7 +683,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">8.6k</span>
+    <span title="Site words total count">9.8k</span>
   
 </div>
 

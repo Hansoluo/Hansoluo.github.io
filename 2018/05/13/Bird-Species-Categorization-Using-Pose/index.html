@@ -100,7 +100,7 @@
 
 
 
-  <meta name="keywords" content="music python," />
+  <meta name="keywords" content="深度学习," />
 
 
 
@@ -111,18 +111,18 @@
 
 
 
-<meta name="description" content="这篇文章是关于JythonMusic网站的学习笔记。">
-<meta name="keywords" content="music python">
+<meta name="description" content="CVPR 2014 Goggle 分享的目标检测综述中特别提及的论文：Bird Species Categorization Using Pose Normalized Deep Convolutional Nets">
+<meta name="keywords" content="深度学习">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JythonMusic学习笔记">
-<meta property="og:url" content="https://hansoluo.github.io/2018/05/08/编编程作曲基本架构/index.html">
+<meta property="og:title" content="&lt;利用姿态归一深度卷积网络实现鸟分类&gt; 论文笔记">
+<meta property="og:url" content="https://hansoluo.github.io/2018/05/13/Bird-Species-Categorization-Using-Pose/index.html">
 <meta property="og:site_name" content="Hansoluo&#39;s blog">
-<meta property="og:description" content="这篇文章是关于JythonMusic网站的学习笔记。">
+<meta property="og:description" content="CVPR 2014 Goggle 分享的目标检测综述中特别提及的论文：Bird Species Categorization Using Pose Normalized Deep Convolutional Nets">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-11T13:29:08.905Z">
+<meta property="og:updated_time" content="2018-05-13T17:17:06.159Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JythonMusic学习笔记">
-<meta name="twitter:description" content="这篇文章是关于JythonMusic网站的学习笔记。">
+<meta name="twitter:title" content="&lt;利用姿态归一深度卷积网络实现鸟分类&gt; 论文笔记">
+<meta name="twitter:description" content="CVPR 2014 Goggle 分享的目标检测综述中特别提及的论文：Bird Species Categorization Using Pose Normalized Deep Convolutional Nets">
 
 
 
@@ -152,13 +152,13 @@
 
 
 
-  <link rel="canonical" href="https://hansoluo.github.io/2018/05/08/编编程作曲基本架构/"/>
+  <link rel="canonical" href="https://hansoluo.github.io/2018/05/13/Bird-Species-Categorization-Using-Pose/"/>
 
 
 
 
 
-  <title>JythonMusic学习笔记 | Hansoluo's blog</title>
+  <title><利用姿态归一深度卷积网络实现鸟分类> 论文笔记 | Hansoluo's blog</title>
   
 
 
@@ -275,7 +275,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hansoluo.github.io/2018/05/08/编编程作曲基本架构/">
+    <link itemprop="mainEntityOfPage" href="https://hansoluo.github.io/2018/05/13/Bird-Species-Categorization-Using-Pose/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Hansoluo">
@@ -292,7 +292,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">JythonMusic学习笔记</h1>
+          <h1 class="post-title" itemprop="name headline"><利用姿态归一深度卷积网络实现鸟分类> 论文笔记</h1>
         
 
         <div class="post-meta">
@@ -304,8 +304,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-08T22:41:44+08:00">
-                2018-05-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-13T12:31:43+08:00">
+                2018-05-13
               </time>
             
 
@@ -336,7 +336,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  385字
+                  478字
                 </span>
               
             </div>
@@ -357,57 +357,50 @@
       
 
       
-        <p>这篇文章是关于<a href="https://jythonmusic.me/" target="_blank" rel="external">JythonMusic网站</a>的学习笔记。<br><a id="more"></a></p>
-<h2 id="Overview页面介绍"><a href="#Overview页面介绍" class="headerlink" title="Overview页面介绍"></a>Overview页面介绍</h2><p>JythonMusic可以看作是编曲API，它可以实现像程序员编写代码一样来完成音乐的作曲。开发者认为编曲和编程在本质是相同的。</p>
-<p>JythonMusic提供了作曲的音乐库，并提供GUI界面和支持连接外部设备如电子琴、智能手机和平板等等。</p>
-<p>JythonMusic基于python语言，适合各类音乐爱好者，无论你是大师还是新手。</p>
-<p>JythonMusic被用于音乐作品的教学、创作和研究。</p>
-<h2 id="Download页面介绍"><a href="#Download页面介绍" class="headerlink" title="Download页面介绍"></a>Download页面介绍</h2><ul>
-<li>给出了下载链接，对于windows用户需要提前安装Java运行环境。</li>
-<li>解压后，双击JEM editor，类似于代码编辑器<ul>
-<li>主界面是文本编辑的界面，可以用来写和修改代码</li>
-<li>工具栏有运行代码按钮</li>
-<li>底下是编译代码的界面 </li>
+        <p>CVPR 2014 Goggle 分享的目标检测综述中特别提及的论文：<a href="https://arxiv.org/abs/1406.2952" target="_blank" rel="external">Bird Species Categorization Using Pose Normalized Deep Convolutional Nets</a><br><a id="more"></a></p>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>先获得物体的姿态，用来生成姿态的图片</li>
+<li>再用DCNN来对姿态图片进行特征提取</li>
+<li>最好的模型整合了带有姿态归一提取的特征图和没有对准的高层级的图片</li>
+<li>关键词：pose normalization /fine-tuning feature / bird species recognition</li>
+</ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h2 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h2><h2 id="Pose-Normalization-Schemes"><a href="#Pose-Normalization-Schemes" class="headerlink" title="Pose Normalization Schemes"></a>Pose Normalization Schemes</h2><h2 id="Deep-Convolutional-Features"><a href="#Deep-Convolutional-Features" class="headerlink" title="Deep Convolutional Features"></a>Deep Convolutional Features</h2><h3 id="对比了4种fine-tune的手法"><a href="#对比了4种fine-tune的手法" class="headerlink" title="对比了4种fine tune的手法"></a>对比了4种fine tune的手法</h3><ul>
+<li>直接使用预训练的ImageNet模型<ul>
+<li>在1.2百万张图片预训练好的ImageNet模型，直接用来作为特征提取器</li>
 </ul>
 </li>
-<li>可以使用命令行</li>
-</ul>
-<h2 id="Examples页面"><a href="#Examples页面" class="headerlink" title="Examples页面"></a>Examples页面</h2><p>提供了很多代码示例</p>
-<h2 id="Reference页面"><a href="#Reference页面" class="headerlink" title="Reference页面"></a>Reference页面</h2><ul>
-<li>这部分是API文档页面，提供了各类函数库的调用和接口说明</li>
-<li>Music Library<ul>
-<li>MIDI Constants：将音乐中的基本元素转化成数字<ul>
-<li>pitch 音高</li>
-<li>duration 音程</li>
+<li>Fine-Tuning the ImageNet Model<ul>
+<li>去掉分类层,1000分类换成200的分类输出层</li>
+<li>新层的权重数据是随机初始化的，因此是很难保持和之前预训练模型的收敛性，因此要用很低的学习速率，一般降低10倍</li>
 </ul>
 </li>
-<li>Transcription 编曲<ul>
-<li>Note 音符</li>
-<li>Phrase 短章</li>
-<li>Part 段落</li>
-<li>Score 完整的曲子</li>
+<li>Two Step Fine-Tuning Method<ul>
+<li>为了避免对于不同层使用不一致的学习速率，提出两级方法</li>
+<li>冻结预训练模型，只训练新层的权重，相当于使用预训练模型做特征提取再进行多分类问题，速度快容易收敛，解决了新层权重初始化的问题</li>
+<li>SGD方法训练所有的网络，这样每一个网络层都能保持相同的学习速率</li>
 </ul>
 </li>
-<li>Composition 组合<ul>
-<li>Mod 对乐曲进行各种变换</li>
-<li>View 乐曲的可视化</li>
-<li>Read / Write 读写MIDI文件</li>
+<li>从头训练<ul>
+<li>从头训练相同的CNN模型，不使用Imagenet权重参数初始化，进行随机处理</li>
 </ul>
 </li>
-<li>Performance <ul>
-<li>Play 播放</li>
-<li>AudioSample 处理音频材料</li>
-<li>LiveSample 处理现场音频材料</li>
-<li>MidiSequence 播放外部MIDI文件</li>
-<li>Metronome 节拍器</li>
+</ul>
+<h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><h3 id="fine-tune手法对比"><a href="#fine-tune手法对比" class="headerlink" title="fine tune手法对比"></a>fine tune手法对比</h3><ul>
+<li>微调CNN权重值可以提高成绩<ul>
+<li>比较手法1和手法2，可以发现手法2的模型表现提高2~10%</li>
 </ul>
 </li>
-<li>Mapping Values 映射值</li>
+<li>预训练模型很重要<ul>
+<li>对比手法2和手法1，发现不用ImageNet模型的权重，模型表现很差</li>
+</ul>
+</li>
+<li>方法3的模型表现最好<ul>
+<li>方法3比方法2的表现要好2%</li>
 </ul>
 </li>
 </ul>
 <h3 id="changelog"><a href="#changelog" class="headerlink" title="changelog"></a>changelog</h3><ul>
-<li>20180508 init</li>
+<li>20180513 init</li>
 </ul>
 
       
@@ -426,7 +419,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/music-python/" rel="tag"># music python</a>
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
           
         </div>
       
@@ -439,8 +432,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/07/Mask-RCNN-论文笔记/" rel="next" title="Mask R-CNN 论文笔记">
-                <i class="fa fa-chevron-left"></i> Mask R-CNN 论文笔记
+              <a href="/2018/05/13/时间管理感悟/" rel="next" title="时间管理感悟">
+                <i class="fa fa-chevron-left"></i> 时间管理感悟
               </a>
             
           </div>
@@ -449,8 +442,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/09/Pytorch入门笔记/" rel="prev" title="pytorch入门笔记">
-                pytorch入门笔记 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/16/读保罗奥斯特《神谕之夜》/" rel="prev" title="读保罗奥斯特《神谕之夜》">
+                读保罗奥斯特《神谕之夜》 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -600,7 +593,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Overview页面介绍"><span class="nav-number">1.</span> <span class="nav-text">Overview页面介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Download页面介绍"><span class="nav-number">2.</span> <span class="nav-text">Download页面介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Examples页面"><span class="nav-number">3.</span> <span class="nav-text">Examples页面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference页面"><span class="nav-number">4.</span> <span class="nav-text">Reference页面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#changelog"><span class="nav-number">4.1.</span> <span class="nav-text">changelog</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Related-Work"><span class="nav-number">3.</span> <span class="nav-text">Related Work</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pose-Normalization-Schemes"><span class="nav-number">4.</span> <span class="nav-text">Pose Normalization Schemes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Deep-Convolutional-Features"><span class="nav-number">5.</span> <span class="nav-text">Deep Convolutional Features</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对比了4种fine-tune的手法"><span class="nav-number">5.1.</span> <span class="nav-text">对比了4种fine tune的手法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiments"><span class="nav-number">6.</span> <span class="nav-text">Experiments</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion"><span class="nav-number">7.</span> <span class="nav-text">Conclusion</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#fine-tune手法对比"><span class="nav-number">7.1.</span> <span class="nav-text">fine tune手法对比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#changelog"><span class="nav-number">7.2.</span> <span class="nav-text">changelog</span></a></li></ol></li></ol></div>
             
 
           </div>
