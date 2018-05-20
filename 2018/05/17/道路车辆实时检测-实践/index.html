@@ -111,18 +111,18 @@
 
 
 
-<meta name="description" content="运用 YOLO 模型实现道路车辆的实时目标检测 问题 只检测车辆，设置label数据为 y = [p_c, b_x, b_y, b_h, b_w, c] p_c = 1 : 目标在显示边界框的概率 b_x, b_y： 边界框的中心点坐标 c = 3 : 检测到物体的类别，3意味着车辆。在这里可以去除，因为只要检测车辆    YOLOchangelog 20180517 init">
+<meta name="description" content="运用 YOLO 模型实现道路车辆的实时目标检测">
 <meta name="keywords" content="深度学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="道路车辆实时检测实践">
 <meta property="og:url" content="https://hansoluo.github.io/2018/05/17/道路车辆实时检测-实践/index.html">
 <meta property="og:site_name" content="Hansoluo&#39;s blog">
-<meta property="og:description" content="运用 YOLO 模型实现道路车辆的实时目标检测 问题 只检测车辆，设置label数据为 y = [p_c, b_x, b_y, b_h, b_w, c] p_c = 1 : 目标在显示边界框的概率 b_x, b_y： 边界框的中心点坐标 c = 3 : 检测到物体的类别，3意味着车辆。在这里可以去除，因为只要检测车辆    YOLOchangelog 20180517 init">
+<meta property="og:description" content="运用 YOLO 模型实现道路车辆的实时目标检测">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-17T15:40:04.980Z">
+<meta property="og:updated_time" content="2018-05-20T15:52:03.235Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="道路车辆实时检测实践">
-<meta name="twitter:description" content="运用 YOLO 模型实现道路车辆的实时目标检测 问题 只检测车辆，设置label数据为 y = [p_c, b_x, b_y, b_h, b_w, c] p_c = 1 : 目标在显示边界框的概率 b_x, b_y： 边界框的中心点坐标 c = 3 : 检测到物体的类别，3意味着车辆。在这里可以去除，因为只要检测车辆    YOLOchangelog 20180517 init">
+<meta name="twitter:description" content="运用 YOLO 模型实现道路车辆的实时目标检测">
 
 
 
@@ -336,7 +336,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  97字
+                  304字
                 </span>
               
             </div>
@@ -357,16 +357,38 @@
       
 
       
-        <p>运用 YOLO 模型实现道路车辆的实时目标检测</p>
+        <p>运用 YOLO 模型实现道路车辆的实时目标检测<br><a id="more"></a></p>
 <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><ul>
-<li>只检测车辆，设置label数据为 y = [p_c, b_x, b_y, b_h, b_w, c]<ul>
+<li>label数据为 y = [p_c, b_x, b_y, b_h, b_w, c1, c2, c3, c4……]<ul>
 <li>p_c = 1 : 目标在显示边界框的概率</li>
 <li>b_x, b_y： 边界框的中心点坐标</li>
-<li>c = 3 : 检测到物体的类别，3意味着车辆。在这里可以去除，因为只要检测车辆</li>
+<li>b_h, b_w： 边界框的高度和宽度</li>
+<li>c  : 检测到物体的类别，可以有多个。<ul>
+<li>在这里用coco数据集训练好的模型，物体类别有80个</li>
 </ul>
 </li>
 </ul>
-<h2 id="YOLO"><a href="#YOLO" class="headerlink" title="YOLO"></a>YOLO</h2><h3 id="changelog"><a href="#changelog" class="headerlink" title="changelog"></a>changelog</h3><ul>
+</li>
+</ul>
+<h2 id="YOLO-模型概述"><a href="#YOLO-模型概述" class="headerlink" title="YOLO 模型概述"></a>YOLO 模型概述</h2><ul>
+<li>输入图片尺寸 (608, 608, 3) (假设)</li>
+<li>输入图片到CNN,输出结果为 (19,19,5,85)<ul>
+<li>图片划分成 19X19 个格子，每个格子里对应的参数为 5*85</li>
+<li>每个格子对应 5 个anchor box</li>
+<li>85 = 5 + 80<ul>
+<li>5 为 [p_c, b_x, b_y, b_h, b_w]</li>
+<li>80 为检测的物体类别</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="源码解读"><a href="#源码解读" class="headerlink" title="源码解读"></a>源码解读</h2><ul>
+<li>参考代码 <a href="https://github.com/allanzelener/YAD2K/blob/master/test_yolo.py" target="_blank" rel="external">YAD2K</a></li>
+<li>源码解读主要是搞懂计算的过程和变量的命名含义</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">def yolo_head(feats, anchors, num_classes):</div><div class="line">    &quot;&quot;&quot;Convert final layer features to bounding box parameters.</div><div class="line"></div><div class="line">    Parameters</div><div class="line">    ----------</div><div class="line">    feats : tensor</div><div class="line">        Final convolutional layer features.</div><div class="line">    anchors : array-like</div><div class="line">        Anchor box widths and heights.</div><div class="line">    num_classes : int</div><div class="line">        Number of target classes.</div><div class="line"></div><div class="line">    Returns</div><div class="line">    -------</div><div class="line">    box_xy : tensor</div><div class="line">        x, y box predictions adjusted by spatial location in conv layer.</div><div class="line">    box_wh : tensor</div><div class="line">        w, h box predictions adjusted by anchors and conv spatial resolution.</div><div class="line">    box_conf : tensor</div><div class="line">        Probability estimate for whether each box contains any object.</div><div class="line">    box_class_pred : tensor</div><div class="line">        Probability distribution estimate for each box over class labels.</div><div class="line">    &quot;&quot;&quot;</div></pre></td></tr></table></figure>
+<h3 id="changelog"><a href="#changelog" class="headerlink" title="changelog"></a>changelog</h3><ul>
 <li>20180517 init</li>
 </ul>
 
@@ -399,8 +421,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/16/在小地方如何自我成长/" rel="next" title="在小地方如何自我成长">
-                <i class="fa fa-chevron-left"></i> 在小地方如何自我成长
+              <a href="/2018/05/16/在小地方如何自我成长/" rel="next" title="SSD 源码解析">
+                <i class="fa fa-chevron-left"></i> SSD 源码解析
               </a>
             
           </div>
@@ -408,6 +430,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/19/opecv-python-API-快速入门/" rel="prev" title="opecv python API 快速入门">
+                opecv python API 快速入门 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -488,7 +514,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -556,7 +582,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#YOLO"><span class="nav-number">2.</span> <span class="nav-text">YOLO</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#changelog"><span class="nav-number">2.1.</span> <span class="nav-text">changelog</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#YOLO-模型概述"><span class="nav-number">2.</span> <span class="nav-text">YOLO 模型概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源码解读"><span class="nav-number">3.</span> <span class="nav-text">源码解读</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#changelog"><span class="nav-number">3.1.</span> <span class="nav-text">changelog</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -590,7 +616,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">9.8k</span>
+    <span title="Site words total count">10.4k</span>
   
 </div>
 
