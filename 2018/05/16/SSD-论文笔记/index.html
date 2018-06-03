@@ -111,21 +111,21 @@
 
 
 
-<meta name="description" content="一句话的感受是： 如果说 tensorflow 则是 C的话，keras是简化版的C，而pytorch 则是 python 。">
+<meta name="description" content="Abstract SSD的方法是在特征图上取一系列不同宽高比和尺寸的默认框（事先定义好）去匹配真实的边界框 多重特征图的预测可以处理不同大小的图片 SSD与区域推荐算法完全不同的是一点是，无需区域生成或者再采样，目标检测算法所有的过程都在单个的神经网络中实现">
 <meta name="keywords" content="深度学习">
 <meta property="og:type" content="article">
-<meta property="og:title" content="pytorch和keras的比较">
-<meta property="og:url" content="https://hansoluo.github.io/2018/05/11/pytorch和keras-tensorflow的比较/index.html">
+<meta property="og:title" content="SSD 论文笔记">
+<meta property="og:url" content="https://hansoluo.github.io/2018/05/16/SSD-论文笔记/index.html">
 <meta property="og:site_name" content="Hansoluo&#39;s blog">
-<meta property="og:description" content="一句话的感受是： 如果说 tensorflow 则是 C的话，keras是简化版的C，而pytorch 则是 python 。">
+<meta property="og:description" content="Abstract SSD的方法是在特征图上取一系列不同宽高比和尺寸的默认框（事先定义好）去匹配真实的边界框 多重特征图的预测可以处理不同大小的图片 SSD与区域推荐算法完全不同的是一点是，无需区域生成或者再采样，目标检测算法所有的过程都在单个的神经网络中实现">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5009326-00b0994497f989a6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5009326-1955428bfdceb91b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-05-20T15:52:08.157Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5009326-bececeea6cd443f7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5009326-e26e7143de542917.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-06-03T15:58:52.440Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="pytorch和keras的比较">
-<meta name="twitter:description" content="一句话的感受是： 如果说 tensorflow 则是 C的话，keras是简化版的C，而pytorch 则是 python 。">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/5009326-00b0994497f989a6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="SSD 论文笔记">
+<meta name="twitter:description" content="Abstract SSD的方法是在特征图上取一系列不同宽高比和尺寸的默认框（事先定义好）去匹配真实的边界框 多重特征图的预测可以处理不同大小的图片 SSD与区域推荐算法完全不同的是一点是，无需区域生成或者再采样，目标检测算法所有的过程都在单个的神经网络中实现">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/5009326-bececeea6cd443f7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -155,13 +155,13 @@
 
 
 
-  <link rel="canonical" href="https://hansoluo.github.io/2018/05/11/pytorch和keras-tensorflow的比较/"/>
+  <link rel="canonical" href="https://hansoluo.github.io/2018/05/16/SSD-论文笔记/"/>
 
 
 
 
 
-  <title>pytorch和keras的比较 | Hansoluo's blog</title>
+  <title>SSD 论文笔记 | Hansoluo's blog</title>
   
 
 
@@ -278,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hansoluo.github.io/2018/05/11/pytorch和keras-tensorflow的比较/">
+    <link itemprop="mainEntityOfPage" href="https://hansoluo.github.io/2018/05/16/SSD-论文笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Hansoluo">
@@ -295,7 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">pytorch和keras的比较</h1>
+          <h1 class="post-title" itemprop="name headline">SSD 论文笔记</h1>
         
 
         <div class="post-meta">
@@ -307,8 +307,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-11T00:12:09+08:00">
-                2018-05-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-16T12:37:13+08:00">
+                2018-05-16
               </time>
             
 
@@ -339,7 +339,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  830字
+                  1,479字
                 </span>
               
             </div>
@@ -360,62 +360,111 @@
       
 
       
-        <p>一句话的感受是：</p>
-<p>如果说 <code>tensorflow</code> 则是 <code>C</code>的话，keras是简化版的<code>C</code>，而<code>pytorch</code> 则是 <code>python</code> 。<br><a id="more"></a></p>
-<p>最主要的两个区别：</p>
+        <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>SSD的方法是在特征图上取一系列不同宽高比和尺寸的默认框（事先定义好）去匹配真实的边界框</li>
+<li>多重特征图的预测可以处理不同大小的图片</li>
+<li>SSD与区域推荐算法完全不同的是一点是，无需区域生成或者再采样，目标检测算法所有的过程都在单个的神经网络中实现<a id="more"></a>
+</li>
+</ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
+<li>区域推荐算法速度慢，不适合实时目标检测</li>
+<li>SSD的做法：<ul>
+<li>用一个小的卷积核预测目标的类别和边界框位置的补偿</li>
+<li>用另外的卷积核为不同比例的检测器进行预测，并且对不同尺寸的特征图上进行</li>
+</ul>
+</li>
+<li>SSD的核心是在不同的特征图上用卷积核针对一系列固定大小的默认框去进行目标分类和位置预测</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/5009326-bececeea6cd443f7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="ssd.png"></p>
+<h2 id="The-Single-Shot-Detector-SSD"><a href="#The-Single-Shot-Detector-SSD" class="headerlink" title="The Single Shot Detector (SSD)"></a>The Single Shot Detector (SSD)</h2><h3 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h3><ul>
+<li>多尺度特征图检测</li>
+<li>卷积预测层<ul>
+<li>VGG16作为基础网络</li>
+<li>每一个新加的层都用卷积去预测出结果</li>
+</ul>
+</li>
+<li>默认框(default boxes)和比例<ul>
+<li>将默认框和对应的特征图的单元格进行关联</li>
+<li>对于一个特征图单元格，预测目标类别和针对默认框形状作微调（offset）</li>
+<li>类似于Faster R-CNN的 anchor boxes </li>
+</ul>
+</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/5009326-e26e7143de542917.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="ssd_architecture.png"></p>
+<h3 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h3><ul>
+<li><p>匹配策略</p>
 <ul>
-<li>层级</li>
-<li>计算图</li>
-</ul>
-<p>比如说都是对 <code>tensor</code> 进行操作，<code>tensorflow</code>缺乏好用的数据类型,而<code>pytorch</code>却有可以实现自动求导的<code>Variable</code>，就像python中非常好用的list数据类型。</p>
-<p>在实际使用中的区别：</p>
-<h2 id="数据预处理和加载"><a href="#数据预处理和加载" class="headerlink" title="数据预处理和加载"></a>数据预处理和加载</h2><p>在数据的加载方便，这一度是困扰很多人的<code>脏活</code>，keras和pytorch都有可以用来加载数据集的工具，但是用法有有点不同。</p>
-<h3 id="keras-中的数据处理"><a href="#keras-中的数据处理" class="headerlink" title="keras 中的数据处理"></a>keras 中的数据处理</h3><ul>
-<li>常规的数据预处理流程：<ul>
-<li>定义变量X和Y，明确shape</li>
-<li>读取和转化图片数据，需用到opencv</li>
-<li>遍历图片，存入 X 和 Y</li>
-<li>使用sklearn.model_selection的train_test_split完成训练和测试数据集的切分</li>
+<li>需要计算 ground truth boxes 和 default boxes的 IOU 值</li>
+<li>一个 ground truth box 对应 多个 default boxes</li>
+<li>选择 IOU阀值 大于 0.5 的进行匹配</li>
 </ul>
 </li>
-<li>数据增强：<ul>
-<li>通过ImageDataGenerator来实现对图片的各种增强操作</li>
-<li>通过datagen.flow方法实例化一个针对图像batch的生成器，用于给模型的输入</li>
-</ul>
-</li>
-<li>label 数据理是手动处理的，和pytorch较大的区别</li>
-</ul>
-<h3 id="pytorch-中的数据处理"><a href="#pytorch-中的数据处理" class="headerlink" title="pytorch 中的数据处理"></a>pytorch 中的数据处理</h3><p>在pytorch 分为两步中有数据集和数据加载。</p>
+<li><p>训练目标</p>
 <ul>
-<li>Dataset.ImageFolder(root, transform, target_transform, loader)<ul>
-<li>读取文件夹root –&gt; loader加载图片 –&gt; transform转换 –&gt; target_transform</li>
-<li>transform提供了对图片数据的各种增强、归一转化等操作</li>
-<li>label是按图片数据不同类的文件夹名顺序来自动编码的，即{类名：类序号}，一般从0开始，比如 cat:0 dog:1，如果不清楚，可以通过self.class_to_idx属性来查看</li>
-<li>实际负责对原始数据的处理(Image –&gt; input_data + label)</li>
+<li>假设一个 ground truth box 匹配上 N个 default boxes，它的损失为 default boxes的损失函数除以个数 N ，相当于取平均值</li>
+<li>对一个default box，损失函数为 定位损失 和 置信度损失 之和</li>
+<li>定位损失采取 L1 平滑方法，针对边界框的中心点坐标和宽度高度进行回归</li>
+<li>分类采用 softmax 损失函数</li>
 </ul>
 </li>
-<li>Dataloader(dataset, batch_size=1, shuffle=False, sampler=None, num_workers=0, collate_fn=default_collate, pin_memory=False, drop_last=False)<ul>
-<li>dataset: 前一步构建好的数据集</li>
-<li>batch_size: CNN的训练一般都是分批，每次对一个batch的数据进行操作，比全部喂入SGD的准确率和速度更好。需要注意batch越大，占用内存越大</li>
-<li>shuffle: 随机打乱 num_workers：多进程加载数</li>
-<li>数据以何种方式喂入训练模型，单条数据实际上还是[image,label]</li>
-<li>dataloader是一个可迭代的对象</li>
+<li><p>为 default boxes 选择 尺寸 和 长宽比</p>
+<ul>
+<li>特征图的重要作用，不仅尺寸越来越小，而且提炼的都是有用信息，特征具有不变性</li>
+<li>低层和高级网络的特征图都可以有效提供图像语义切割的成绩</li>
+<li>SSD同时利用低级和高级特征图进行检测</li>
+<li>不同特征图具有不同感受范围，defaultboxes的大小不用特意去设计，而是根据特征图去相应的生成相应的大小</li>
+</ul>
+</li>
+<li><p>负面数据过多</p>
+<ul>
+<li>在匹配的过程中，大量错误的default boxes生成，远远超过正确的数量</li>
+<li>为避免数据不平衡导致的训练不对等，取置信度高的样本</li>
+<li>控制正负比例 为 3：1</li>
+</ul>
+</li>
+<li><p>数据增强</p>
+<ul>
+<li>使用所有的原图</li>
+<li>采用IOU比 0.1/0.3.0.5.0.7.0.9 来批量取样</li>
+<li>随机采样，采样图像为原始图像大小的[0.1，1]，长宽比在1/2和2之间</li>
+<li>光度变形</li>
+<li>水平翻转</li>
 </ul>
 </li>
 </ul>
-<h2 id="构建计算图"><a href="#构建计算图" class="headerlink" title="构建计算图"></a>构建计算图</h2><p>最主要的差别在于keras和tensorflow都是基于静态图的方法来计算的，而pytorch是动态的方式来生成的。举官方的两个例子来对比，最能说明问题。</p>
-<h3 id="tensorflow的方式"><a href="#tensorflow的方式" class="headerlink" title="tensorflow的方式"></a>tensorflow的方式</h3><ul>
-<li>使用图(graph)来表示计算任务</li>
-<li>在会话(session)中的执行图</li>
+<h2 id="Experimental-Results"><a href="#Experimental-Results" class="headerlink" title="Experimental Results"></a>Experimental Results</h2><h3 id="PASCAL-VOC2007"><a href="#PASCAL-VOC2007" class="headerlink" title="PASCAL VOC2007"></a>PASCAL VOC2007</h3><ul>
+<li>SSD300模型: 使用conv4_3，conv7（fc7），conv8_2，conv9_2，conv10_2和conv11_2来预测位置和置信度</li>
+<li>对于conv4_3，conv10_2和conv11_2，只关联了4个默认边界框。对于所有其它层，放置了6个默认边界框</li>
+<li>SSD300比Faster R-CNN好1.1%，SSD512比Faster R-CNN好3.6%</li>
+<li>SSD对边界框大小很敏感。它在较小目标上检测性能要差，增加输入尺寸（例如从300×300到512×512）可以帮助改进检测小目标</li>
 </ul>
-<p><img src="https://upload-images.jianshu.io/upload_images/5009326-00b0994497f989a6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="tensorflow.png"></p>
-<p>keras使用的是静态图的方式，涉及优化器的选择、损失函数的定义，模型的保存等等。<br>训练模型时，把事先定义好的X_tarin和Y_train，喂入模型直接训练<br><code>model.fit(X_train, y_train, batch_size=32, epochs=16......)</code></p>
-<h3 id="torch的方式"><a href="#torch的方式" class="headerlink" title="torch的方式"></a>torch的方式</h3><p>Pytorch则需要动态地构建可自动求导的变量Variable,喂入模型，定义loss进行反向传播求导。<br><code>loss.backward()</code></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5009326-1955428bfdceb91b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="torch.png"></p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>kears更简单点，但是也可能过封装了。Pytorch的动态构建需要遵循tensor–&gt;Variable–&gt;model的层级逐步定义完成，比keras麻烦一点，但是极大的利用了python的语法，增加了灵活性。</p>
-<p>使用keras，更多的是调用函数，而几乎不用写过多的代码；使用pytorch，则天然的用python语言，来灵活构建所需代码。</p>
+<h3 id="模型分析"><a href="#模型分析" class="headerlink" title="模型分析"></a>模型分析</h3><ul>
+<li>数据增强很重要</li>
+<li>更多的默认边界框比例会更好</li>
+<li>多个不同分辨率的输出层更好</li>
+</ul>
+<h3 id="VOC2007测试后结论"><a href="#VOC2007测试后结论" class="headerlink" title="VOC2007测试后结论"></a>VOC2007测试后结论</h3><p>SSD300是唯一可以取得70%以上mAP的实现检测方法。通过使用更大的输入图像，SSD512在精度上超过了所有方法同时保持近似实时的速度。</p>
+<h2 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h2><h3 id="与RCNN方法比较"><a href="#与RCNN方法比较" class="headerlink" title="与RCNN方法比较"></a>与RCNN方法比较</h3><ul>
+<li>最初的R-CNN方法需要对成千上万的裁剪图像进行分类，这是昂贵和耗时的</li>
+<li>SPPnet加快了原有的R-CNN方法，引入了空间金字塔，并使用多个分辨率下的特征图</li>
+<li>Faster R-CNN用RPN取代了选择性搜索，进行ROI提取，通过交替两个网络之间的微调共享卷积层和预测层将RPN和Fast R-CNN结合在一起</li>
+<li>SSD与Faster R-CNN中的区域提出网络（RPN）非常相似，因为我们也使用一组固定的（默认）边界框(prior/default boxes)进行预测，类似于RPN中的锚边界框（anchor boxes）</li>
+<li>但是SSD不需要利用Roi-pool后的特征进行分类，而是在每个目标类别在每个边界框中同时生成一个分数，相比叫来说更容易训练和更快</li>
+</ul>
+<h3 id="与YOLO-OverFeat比较"><a href="#与YOLO-OverFeat比较" class="headerlink" title="与YOLO/OverFeat比较"></a>与YOLO/OverFeat比较</h3><ul>
+<li>OverFeat是滑动窗口方法的深度版本，在获得底层目标类别的置信度之后，直接预测边界框</li>
+<li>YOLO直接对图像的最顶层的特征图进行处理，预测类别和边界框置信度</li>
+<li>如果不使用多个特征图进行多个默认框的预测，而是直接基于最顶层的特征图上使用默认框，则和overfeat类似</li>
+<li>如果直接在最顶层的特征图加上一个全连接层进行预测来代替卷积预测器，则近似YOLO</li>
+</ul>
+<h2 id="Conclusions"><a href="#Conclusions" class="headerlink" title="Conclusions"></a>Conclusions</h2><ul>
+<li>本文介绍了SSD，一种快速的单次多类别目标检测器。我们模型的一个关键特性是使用网络顶部多个特征映射的多尺度卷积边界框输出</li>
+<li>大量仔细选择默认边界框会提高性能，SSD模型比现有方法至少要多一个数量级的边界框预测采样位置，尺度和长宽比</li>
+<li>SSD在准确性和速度方面与其对应的最先进的目标检测器相比毫不逊色</li>
+</ul>
 <h3 id="changelog"><a href="#changelog" class="headerlink" title="changelog"></a>changelog</h3><ul>
-<li>20180511 init</li>
+<li>20180516 init</li>
+<li>20180601 modify</li>
 </ul>
 
       
@@ -447,8 +496,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/09/Pytorch-学习笔记/" rel="next" title="pytorch入门笔记">
-                <i class="fa fa-chevron-left"></i> pytorch入门笔记
+              <a href="/2018/05/16/RCNN-论文笔记/" rel="next" title="RCNN 论文笔记">
+                <i class="fa fa-chevron-left"></i> RCNN 论文笔记
               </a>
             
           </div>
@@ -457,8 +506,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/11/吉他练习手记（一）/" rel="prev" title="吉他练习手记（一）">
-                吉他练习手记（一） <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/17/道路车辆实时检测-实践/" rel="prev" title="道路车辆实时检测实践">
+                道路车辆实时检测实践 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -608,7 +657,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据预处理和加载"><span class="nav-number">1.</span> <span class="nav-text">数据预处理和加载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#keras-中的数据处理"><span class="nav-number">1.1.</span> <span class="nav-text">keras 中的数据处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pytorch-中的数据处理"><span class="nav-number">1.2.</span> <span class="nav-text">pytorch 中的数据处理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构建计算图"><span class="nav-number">2.</span> <span class="nav-text">构建计算图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#tensorflow的方式"><span class="nav-number">2.1.</span> <span class="nav-text">tensorflow的方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#torch的方式"><span class="nav-number">2.2.</span> <span class="nav-text">torch的方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">3.</span> <span class="nav-text">结论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#changelog"><span class="nav-number">3.1.</span> <span class="nav-text">changelog</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Single-Shot-Detector-SSD"><span class="nav-number">3.</span> <span class="nav-text">The Single Shot Detector (SSD)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模型"><span class="nav-number">3.1.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#训练"><span class="nav-number">3.2.</span> <span class="nav-text">训练</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experimental-Results"><span class="nav-number">4.</span> <span class="nav-text">Experimental Results</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PASCAL-VOC2007"><span class="nav-number">4.1.</span> <span class="nav-text">PASCAL VOC2007</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模型分析"><span class="nav-number">4.2.</span> <span class="nav-text">模型分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VOC2007测试后结论"><span class="nav-number">4.3.</span> <span class="nav-text">VOC2007测试后结论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Related-Work"><span class="nav-number">5.</span> <span class="nav-text">Related Work</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#与RCNN方法比较"><span class="nav-number">5.1.</span> <span class="nav-text">与RCNN方法比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#与YOLO-OverFeat比较"><span class="nav-number">5.2.</span> <span class="nav-text">与YOLO/OverFeat比较</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusions"><span class="nav-number">6.</span> <span class="nav-text">Conclusions</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#changelog"><span class="nav-number">6.1.</span> <span class="nav-text">changelog</span></a></li></ol></li></ol></div>
             
 
           </div>
