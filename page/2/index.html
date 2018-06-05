@@ -337,7 +337,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,479字
+                  1,575字
                 </span>
               
             </div>
@@ -359,10 +359,10 @@
 
       
         
-          <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
-<li>SSD的方法是在特征图上取一系列不同宽高比和尺寸的默认框（事先定义好）去匹配真实的边界框</li>
-<li>多重特征图的预测可以处理不同大小的图片</li>
-<li>SSD与区域推荐算法完全不同的是一点是，无需区域生成或者再采样，目标检测算法所有的过程都在单个的神经网络中实现
+          <h2 id="理解SSD"><a href="#理解SSD" class="headerlink" title="理解SSD"></a>理解SSD</h2><ul>
+<li>巧妙利用了多重特征图，加快了速度</li>
+<li>一次运行，利用anchors或者prior/default boxes直接完成目标分类和BBox回归</li>
+<li>按照SSD300的模型，在不同的卷积层上生成一共7308个prior boxes,针对每个box区域都预测出class置信度和BBox的位置，再进行阈值过滤和NMS处理
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/05/16/SSD-论文笔记/#more" rel="contents">
@@ -1775,7 +1775,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">13.3k</span>
+    <span title="Site words total count">14.1k</span>
   
 </div>
 
