@@ -100,7 +100,7 @@
 
 
 
-  <meta name="keywords" content="opencv," />
+  <meta name="keywords" content="opencv,目标跟踪," />
 
 
 
@@ -112,14 +112,14 @@
 
 
 <meta name="description" content="本文是图书 OpenCV 3计算机视觉 第8章（目标跟踪）的学习笔记。">
-<meta name="keywords" content="opencv">
+<meta name="keywords" content="opencv,目标跟踪">
 <meta property="og:type" content="article">
 <meta property="og:title" content="opencv_目标跟踪_学习笔记">
 <meta property="og:url" content="https://hansoluo.github.io/2018/06/01/opencv-目标跟踪-学习笔记/index.html">
 <meta property="og:site_name" content="Hansoluo&#39;s blog">
 <meta property="og:description" content="本文是图书 OpenCV 3计算机视觉 第8章（目标跟踪）的学习笔记。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-04T15:14:00.042Z">
+<meta property="og:updated_time" content="2018-06-05T04:35:50.688Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="opencv_目标跟踪_学习笔记">
 <meta name="twitter:description" content="本文是图书 OpenCV 3计算机视觉 第8章（目标跟踪）的学习笔记。">
@@ -336,7 +336,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  933字
+                  944字
                 </span>
               
             </div>
@@ -369,7 +369,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="背景减除-Background-Subtraction"><a href="#背景减除-Background-Subtraction" class="headerlink" title="背景减除(Background Subtraction)"></a>背景减除(Background Subtraction)</h2><h3 id="简单的例子：计算帧与帧之间的差异"><a href="#简单的例子：计算帧与帧之间的差异" class="headerlink" title="简单的例子：计算帧与帧之间的差异"></a>简单的例子：计算帧与帧之间的差异</h3><ul>
+<h3 id="背景减除-Background-Subtraction"><a href="#背景减除-Background-Subtraction" class="headerlink" title="背景减除(Background Subtraction)"></a>背景减除(Background Subtraction)</h3><h4 id="简单的例子：计算帧与帧之间的差异"><a href="#简单的例子：计算帧与帧之间的差异" class="headerlink" title="简单的例子：计算帧与帧之间的差异"></a>简单的例子：计算帧与帧之间的差异</h4><ul>
 <li><p>计算差异，并对图像进行预处理</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">diff = cv2.absdiff(background, gray_frame) # 得到差分图</div><div class="line">diff = cv2.threshold(diff, 25, 255, cv2.THRESH_BINARY)[1] # 应用阈值得到黑白图像</div><div class="line">diff = cv2.dilate(diff, es, iterations = 2) # 侵蚀和膨胀</div></pre></td></tr></table></figure>
 </li>
@@ -379,7 +379,7 @@
 <li><p>不足：需要默认帧作为背景，如果光照变化频繁，因为有阴影的存在，处理效果较差</p>
 </li>
 </ul>
-<h3 id="背景分割器：-KNN、MOG2和GMG"><a href="#背景分割器：-KNN、MOG2和GMG" class="headerlink" title="背景分割器： KNN、MOG2和GMG"></a>背景分割器： KNN、MOG2和GMG</h3><ul>
+<h4 id="背景分割器：-KNN、MOG2和GMG"><a href="#背景分割器：-KNN、MOG2和GMG" class="headerlink" title="背景分割器： KNN、MOG2和GMG"></a>背景分割器： KNN、MOG2和GMG</h4><ul>
 <li>提高背景分割器的精度<ul>
 <li>采用KNN或者高斯分布的方法对背景进行建模</li>
 <li>GMG可以对前120帧进行学习，MOG2可以使用前20帧或者更多的进行训练</li>
@@ -388,7 +388,7 @@
 </li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">bs = cv2.createBackgroundSubtractorMOG2(detectShadows=True) # 构建背景分割器</div><div class="line">fg_mask = bs.apply(frame)  # 执行背景分割</div></pre></td></tr></table></figure>
-<h2 id="均值漂移和CAMShift"><a href="#均值漂移和CAMShift" class="headerlink" title="均值漂移和CAMShift"></a>均值漂移和CAMShift</h2><ul>
+<h3 id="均值漂移和CAMShift"><a href="#均值漂移和CAMShift" class="headerlink" title="均值漂移和CAMShift"></a>均值漂移和CAMShift</h3><ul>
 <li><p>Meanshift算法依赖于直方图，给定ROI区域后，先计算出最大灰度密度，并且重新计算在下一帧中的最大密度，如此就给出了目标的移动方向</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">term_crit = ( cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 10, 1 ) # 设置迭代10次后收敛</div><div class="line">ret, track_window = cv2.meanShift(dst, track_window, term_crit) # 应用</div></pre></td></tr></table></figure>
 </li>
@@ -397,7 +397,7 @@
 <li>CAMshift 可以解决上述问题，在 Meanshift 的基础上，调整目标框的大小和角度<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">ret, track_window = cv2.CamShift(dst, track_window, term_crit) # 应用</div><div class="line"># Draw it on image</div><div class="line">pts = cv2.boxPoints(ret)</div><div class="line">pts = np.int0(pts)</div><div class="line">img2 = cv2.polylines(frame,[pts],True, 255,2)</div><div class="line">cv2.imshow(&apos;img2&apos;,img2)</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="卡尔曼滤波器"><a href="#卡尔曼滤波器" class="headerlink" title="卡尔曼滤波器"></a>卡尔曼滤波器</h2><ul>
+<h3 id="卡尔曼滤波器"><a href="#卡尔曼滤波器" class="headerlink" title="卡尔曼滤波器"></a>卡尔曼滤波器</h3><ul>
 <li>(stage1)预测： 使用当前点计算的协方差来估计目标的新位置  <code>kalman.predict()</code></li>
 <li>(stage2)更新： 记录目标的位置，并为下一次循环计算修正的协方差 <code>kalman.correct()</code></li>
 </ul>
@@ -410,6 +410,10 @@
 <li>检查下一帧是否有进入场景的新行人</li>
 </ul>
 </li>
+</ul>
+<h3 id="其他参考文档"><a href="#其他参考文档" class="headerlink" title="其他参考文档"></a>其他参考文档</h3><ul>
+<li><a href="http://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_video/py_meanshift/py_meanshift.html#meanshift" target="_blank" rel="external">opencv-meanshift</a></li>
+<li><a href="http://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_video/py_bg_subtraction/py_bg_subtraction.html#background-subtraction" target="_blank" rel="external">opencv-background-subtraction</a></li>
 </ul>
 <h3 id="changelog"><a href="#changelog" class="headerlink" title="changelog"></a>changelog</h3><ul>
 <li>20180601 init</li>
@@ -433,6 +437,8 @@
         <div class="post-tags">
           
             <a href="/tags/opencv/" rel="tag"># opencv</a>
+          
+            <a href="/tags/目标跟踪/" rel="tag"># 目标跟踪</a>
           
         </div>
       
@@ -538,7 +544,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -551,7 +557,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -606,7 +612,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#导论"><span class="nav-number">1.</span> <span class="nav-text">导论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何检测移动目标"><span class="nav-number">2.</span> <span class="nav-text">如何检测移动目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#背景减除-Background-Subtraction"><span class="nav-number">3.</span> <span class="nav-text">背景减除(Background Subtraction)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单的例子：计算帧与帧之间的差异"><span class="nav-number">3.1.</span> <span class="nav-text">简单的例子：计算帧与帧之间的差异</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#背景分割器：-KNN、MOG2和GMG"><span class="nav-number">3.2.</span> <span class="nav-text">背景分割器： KNN、MOG2和GMG</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#均值漂移和CAMShift"><span class="nav-number">4.</span> <span class="nav-text">均值漂移和CAMShift</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#卡尔曼滤波器"><span class="nav-number">5.</span> <span class="nav-text">卡尔曼滤波器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#行人跟踪的实例"><span class="nav-number">6.</span> <span class="nav-text">行人跟踪的实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#changelog"><span class="nav-number">6.1.</span> <span class="nav-text">changelog</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#导论"><span class="nav-number">1.</span> <span class="nav-text">导论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何检测移动目标"><span class="nav-number">2.</span> <span class="nav-text">如何检测移动目标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景减除-Background-Subtraction"><span class="nav-number">2.1.</span> <span class="nav-text">背景减除(Background Subtraction)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#简单的例子：计算帧与帧之间的差异"><span class="nav-number">2.1.1.</span> <span class="nav-text">简单的例子：计算帧与帧之间的差异</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#背景分割器：-KNN、MOG2和GMG"><span class="nav-number">2.1.2.</span> <span class="nav-text">背景分割器： KNN、MOG2和GMG</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#均值漂移和CAMShift"><span class="nav-number">2.2.</span> <span class="nav-text">均值漂移和CAMShift</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卡尔曼滤波器"><span class="nav-number">2.3.</span> <span class="nav-text">卡尔曼滤波器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#行人跟踪的实例"><span class="nav-number">3.</span> <span class="nav-text">行人跟踪的实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#其他参考文档"><span class="nav-number">3.1.</span> <span class="nav-text">其他参考文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#changelog"><span class="nav-number">3.2.</span> <span class="nav-text">changelog</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -640,7 +646,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">12.8k</span>
+    <span title="Site words total count">13.3k</span>
   
 </div>
 
