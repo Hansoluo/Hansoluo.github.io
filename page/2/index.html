@@ -416,7 +416,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hansoluo.github.io/2018/05/16/RCNN-论文笔记/">
+    <link itemprop="mainEntityOfPage" href="https://hansoluo.github.io/2018/05/16/Faster-RCNN-论文笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Hansoluo">
@@ -435,7 +435,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/16/RCNN-论文笔记/" itemprop="url">RCNN 论文笔记</a></h1>
+                <a class="post-title-link" href="/2018/05/16/Faster-RCNN-论文笔记/" itemprop="url">Faster R-CNN 论文笔记</a></h1>
         
 
         <div class="post-meta">
@@ -479,7 +479,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  0字
+                  1,037字
                 </span>
               
             </div>
@@ -501,9 +501,17 @@
 
       
         
-          
-            
-          
+          <h2 id="理解-Faster-R-CNN"><a href="#理解-Faster-R-CNN" class="headerlink" title="理解 Faster R-CNN"></a>理解 Faster R-CNN</h2><ul>
+<li>第一阶段使用生成推荐区域的RPN网络，利用anchors生成边界框进行背景识别和定位回归，得到256个ROI，提高了推荐的区域质量</li>
+<li>第二阶段用推荐的ROI再进行目标的识别和定位的细化</li>
+<li>两阶段的网络共享全图像的卷积特征
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/16/Faster-RCNN-论文笔记/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1775,7 +1783,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">14.1k</span>
+    <span title="Site words total count">15.1k</span>
   
 </div>
 
