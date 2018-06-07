@@ -123,7 +123,7 @@
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5009326-8ca480655a4edb36.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5009326-bac9f30aa078c13e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5009326-748be7417c096514.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-06-06T15:27:50.154Z">
+<meta property="og:updated_time" content="2018-06-06T15:32:03.336Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Faster R-CNN 论文笔记">
 <meta name="twitter:description" content="理解 Faster R-CNN 第一阶段使用生成推荐区域的RPN网络，利用anchors生成边界框进行背景识别和定位回归，得到256个ROI，提高了推荐的区域质量 第二阶段用推荐的ROI再进行目标的识别和定位的细化 两阶段的网络共享全图像的卷积特征">
@@ -341,7 +341,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,037字
+                  1,039字
                 </span>
               
             </div>
@@ -440,8 +440,8 @@
 </li>
 </ul>
 <h3 id="具体细节"><a href="#具体细节" class="headerlink" title="具体细节"></a>具体细节</h3><ul>
-<li>锚点的三个尺度： 128<em>128 256</em>256 512*512</li>
-<li>三个比例：1:1 1:2 2:1</li>
+<li>锚点的三个尺度： 128 <em> 128 /256 </em> 256 /512 * 512</li>
+<li>三个比例： 1:1 /1:2 /2:1</li>
 <li>用NMS减少RPN的推荐区域</li>
 </ul>
 <h3 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h3><ul>
@@ -580,7 +580,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">30</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -682,7 +682,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">15.1k</span>
+    <span title="Site words total count">15.9k</span>
   
 </div>
 
