@@ -6,7 +6,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
   
-  <title>我的Hexo博客搭建过程 - Hansoluo&#39;s blog</title>
+  <title>我的Hexo博客搭建过程 undefined Hansoluo&#39;s blog</title>
   <link rel="icon" href="https://i.imgur.com/SrZt9VU.jpg" type="image/x-icon">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   
@@ -15,8 +15,6 @@
     <meta name="description" content="The dream of love and hope shall never die">
   
   
-  
-    <link rel="alternate" href="/atom.xml " title="Hansoluo&#39;s blog" type="application/atom+xml">
   
 
   <link rel="stylesheet" href="/css/style.css">
@@ -37,15 +35,7 @@
         </li>
       
         <li class="menu-item">
-          <a href="/summary" class="menu-item-link">Summary</a>
-        </li>
-      
-        <li class="menu-item">
           <a href="/about" class="menu-item-link">关于</a>
-        </li>
-      
-        <li class="menu-item">
-          <a href="/atom.xml" class="menu-item-link">RSS</a>
         </li>
       
     </ul>
@@ -111,9 +101,13 @@
 </ul>
 </li>
 <li>hexo本身只能完成本地的部署，不可以完成公网的部署</li>
-<li>公网部署的原理是利用<code>github</code>生成的<code>GitHub_page</code>，生成独立域名后，再利用它来进行公网部署，这样别人也可以来看你的博客</li>
+<li><p>公网部署的原理是利用<code>github</code>生成的<code>GitHub_page</code>，生成独立域名后，再利用它来进行公网部署，这样别人也可以来看你的博客</p>
+</li>
+<li><p>当更换电脑,在其他地方重新部署,出现github限无法获取远程仓库,导致部署失败</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">hexo d</div><div class="line">Warning: Permanently added <span class="keyword">the</span> RSA host key <span class="keyword">for</span> IP address <span class="string">'13.229.188.59'</span> <span class="built_in">to</span> <span class="keyword">the</span> list <span class="keyword">of</span> known hosts.</div><div class="line">Permission denied (publickey).</div><div class="line">fatal: Could <span class="keyword">not</span> <span class="built_in">read</span> <span class="built_in">from</span> remote repository.</div></pre></td></tr></table></figure>
+</li>
 </ul>
-<p><code>hexo d</code> 当更换电脑,在其他地方重新部署,出现github限无法获取远程仓库问题.<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Warning: Permanently added <span class="keyword">the</span> RSA host key <span class="keyword">for</span> IP address <span class="string">'13.229.188.59'</span> <span class="built_in">to</span> <span class="keyword">the</span> list <span class="keyword">of</span> known hosts.</div><div class="line">Permission denied (publickey).</div><div class="line">fatal: Could <span class="keyword">not</span> <span class="built_in">read</span> <span class="built_in">from</span> remote repository.</div></pre></td></tr></table></figure></p>
+<p>解决方法: 修改_config.yml repo地址为https<br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">repo</span>: <span class="attribute">https</span>:<span class="comment">//github.com/Hansoluo/hansoluo.github.io.git</span></div><div class="line"># <span class="attribute">repo</span>:  git<span class="variable">@github</span>.<span class="attribute">com</span>:Hansoluo/hansoluo.github.io.git</div></pre></td></tr></table></figure></p>
 <h2 id="文章编写及发布流程"><a href="#文章编写及发布流程" class="headerlink" title="文章编写及发布流程"></a>文章编写及发布流程</h2><ul>
 <li>流程：<ul>
 <li>使用草稿模式<code>hexo new draft &quot;文章标题&quot;</code>写草稿</li>
