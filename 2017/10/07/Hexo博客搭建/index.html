@@ -33,19 +33,19 @@
     <ul class="menu">
       
         <li class="menu-item">
-          <a href="/" class="menu-item-link">字</a>
+          <a href="/categories/word/" class="menu-item-link">字</a>
         </li>
       
         <li class="menu-item">
-          <a href="/movie" class="menu-item-link">影</a>
+          <a href="/categories/movie/" class="menu-item-link">影</a>
         </li>
       
         <li class="menu-item">
-          <a href="/book" class="menu-item-link">书</a>
+          <a href="/categories/book/" class="menu-item-link">书</a>
         </li>
       
         <li class="menu-item">
-          <a href="/code" class="menu-item-link">码</a>
+          <a href="/categories/code/" class="menu-item-link">码</a>
         </li>
       
         <li class="menu-item">
@@ -62,7 +62,7 @@
   </div>
 
   <!-- 文章目录 -->
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#搭建博客"><span class="toc-text">搭建博客</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原理"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主题美化"><span class="toc-text">主题美化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#部署"><span class="toc-text">部署</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文章编写及发布流程"><span class="toc-text">文章编写及发布流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Changelog"><span class="toc-text">Changelog</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#搭建博客"><span class="toc-text">搭建博客</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原理"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主题美化"><span class="toc-text">主题美化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#部署"><span class="toc-text">部署</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文章编写及发布流程"><span class="toc-text">文章编写及发布流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#博客变更记录"><span class="toc-text">博客变更记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Changelog"><span class="toc-text">Changelog</span></a></li></ol>
 
   <div class="post-content">
     <p>此为本博客建立的第一篇文章，记录了搭建hexo博客的过程。博客搭建本意是用来记录一些技术型的文章，比如折腾各种工具的过程，学习编程的过程记录等，或者一些杂七杂八的思考吧。比豆瓣简书清净，比之微信公众号便于修改和管理。<br><a id="more"></a></p>
@@ -105,6 +105,11 @@
 <li><a href="http://prozhuchen.com/2015/10/05/Hexo%E5%8D%9A%E5%AE%A2%E4%B9%8B%E6%94%B9%E5%AD%97%E4%BD%93/" target="_blank" rel="external">Hexo博客之改字体和大小</a></li>
 <li><a href="http://theme-next.iissnan.com/tag-plugins.html" target="_blank" rel="external">文本居中的引用</a></li>
 <li><a href="http://theme-next.iissnan.com/faqs.html" target="_blank" rel="external">设置阅读全文</a></li>
+<li><a href="https://www.zhihu.com/question/33324071" target="_blank" rel="external">hexo下新建页面下如何放多个文章？</a><ul>
+<li>修改 “themes/landscape/config.yml”, 页面添加categories</li>
+<li>文章头部信息,增加categories信息</li>
+</ul>
+</li>
 </ul>
 <h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><ul>
 <li><a href="https://hexo.io/zh-cn/docs/index.html" target="_blank" rel="external">hexo install</a><ul>
@@ -142,10 +147,18 @@
 </li>
 <li>发布文章后，如果对文章修改后重新发布，则无需<code>hexo new</code>，其他同发布流程</li>
 </ul>
+<h2 id="博客变更记录"><a href="#博客变更记录" class="headerlink" title="博客变更记录"></a>博客变更记录</h2><ul>
+<li>主题为 next</li>
+<li>变更主题为 maupassant</li>
+<li>变更主题为 polk-x</li>
+<li>页面设置为 字,码,书,影, 分门别类存储不同类别文章</li>
+<li>迁移douban文章到blog</li>
+</ul>
 <p>```</p>
 <h2 id="Changelog"><a href="#Changelog" class="headerlink" title="Changelog"></a>Changelog</h2><ul>
 <li>2017-10-7 创建</li>
 <li>2017-11-14 增加主题美化</li>
+<li>2019-8-22 更新主题为polk-x</li>
 </ul>
 
   </div>
