@@ -6,7 +6,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
   
-  <title>我的Hexo博客搭建过程 undefined Hansoluo&#39;s blog</title>
+  <title>Hexo博客搭建过程 undefined Hansoluo&#39;s blog</title>
 <!--   <link rel="icon" href="https://i.imgur.com/SrZt9VU.jpg" type="image/x-icon">
  -->  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   
@@ -49,6 +49,10 @@
         </li>
       
         <li class="menu-item">
+          <a href="/mind" class="menu-item-link">心</a>
+        </li>
+      
+        <li class="menu-item">
           <a href="/about" class="menu-item-link">我</a>
         </li>
       
@@ -58,7 +62,7 @@
 
 <article class="post">
   <div class="post-title">
-    <h1 class="article-title">我的Hexo博客搭建过程</h1>
+    <h1 class="article-title">Hexo博客搭建过程</h1>
   </div>
 
   <!-- 文章目录 -->
@@ -125,8 +129,10 @@
 <li><p>当更换电脑,在其他地方重新部署,出现github限无法获取远程仓库,导致部署失败</p>
 <figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">hexo d</div><div class="line">Warning: Permanently added <span class="keyword">the</span> RSA host key <span class="keyword">for</span> IP address <span class="string">'13.229.188.59'</span> <span class="built_in">to</span> <span class="keyword">the</span> list <span class="keyword">of</span> known hosts.</div><div class="line">Permission denied (publickey).</div><div class="line">fatal: Could <span class="keyword">not</span> <span class="built_in">read</span> <span class="built_in">from</span> remote repository.</div></pre></td></tr></table></figure>
 </li>
+<li><p>解决方法: 修改_config.yml repo地址为https</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">repo</span>: <span class="attribute">https</span>:<span class="comment">//github.com/Hansoluo/hansoluo.github.io.git</span></div><div class="line">#<span class="attribute">repo</span>:  git<span class="variable">@github</span>.<span class="attribute">com</span>:Hansoluo/hansoluo.github.io.git</div></pre></td></tr></table></figure>
+</li>
 </ul>
-<p>解决方法: 修改_config.yml repo地址为https<br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">repo</span>: <span class="attribute">https</span>:<span class="comment">//github.com/Hansoluo/hansoluo.github.io.git</span></div><div class="line"># <span class="attribute">repo</span>:  git<span class="variable">@github</span>.<span class="attribute">com</span>:Hansoluo/hansoluo.github.io.git</div></pre></td></tr></table></figure></p>
 <h2 id="文章编写及发布流程"><a href="#文章编写及发布流程" class="headerlink" title="文章编写及发布流程"></a>文章编写及发布流程</h2><ul>
 <li>流程：<ul>
 <li>使用草稿模式<code>hexo new draft &quot;文章标题&quot;</code>写草稿</li>
@@ -154,7 +160,6 @@
 <li>页面设置为 字,码,书,影, 分门别类存储不同类别文章</li>
 <li>迁移douban文章到blog</li>
 </ul>
-<p>```</p>
 <h2 id="Changelog"><a href="#Changelog" class="headerlink" title="Changelog"></a>Changelog</h2><ul>
 <li>2017-10-7 创建</li>
 <li>2017-11-14 增加主题美化</li>
